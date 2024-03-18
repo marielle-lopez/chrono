@@ -2,9 +2,14 @@
 
 ## Task Completion History
 
+### 18 March 2024
+
+- Installed Tailwind CSS to handle styling
+- Created a `Cell` component to represent each day of a month, and a corresponding `CellList` container component
+
 ### 17 March 2024
 
-- Continued working on the design mockup of Chrono
+- Completed the design mockup of Chrono
 
 ### 16 March 2024
 
