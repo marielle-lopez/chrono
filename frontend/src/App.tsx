@@ -4,9 +4,13 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import MonthPage from './pages/MonthPage/MonthPage';
 import { Month } from './helpers/enums';
+import DayPage from './pages/DayPage/DayPage';
+import WeekPage from './pages/WeekPage/WeekPage';
+import { daysInMonth } from './helpers/functions';
 
 function App() {
   const [view, setView] = useState('month');
+  const [day, setDay] = useState(new Date());
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
 
@@ -18,6 +22,38 @@ function App() {
 
   const handleDecrement = () => {
     console.log('Decrement');
+    if (view === 'day') {
+      if (day.getDate() === 1) {
+        let previousMonth = day.getMonth() - 1;
+        if (previousMonth < 0) {
+          const previousYear = day.getFullYear() - 1;
+          previousMonth = 11;
+          const previousDay = daysInMonth(previousMonth + 1, previousYear);
+          const previousDate = new Date(
+            previousYear,
+            previousMonth,
+            previousDay
+          );
+          setDay(previousDate);
+          return;
+        } else {
+          const previousDay = daysInMonth(previousMonth + 1, day.getFullYear());
+          const previousDate = new Date(
+            day.getFullYear(),
+            previousMonth,
+            previousDay
+          );
+          setDay(previousDate);
+          return;
+        }
+      }
+      const previousDate = new Date(
+        day.getFullYear(),
+        day.getMonth(),
+        day.getDate() - 1
+      );
+      setDay(previousDate);
+    }
     if (view === 'month') {
       if (month === 0) {
         setYear(year - 1);
@@ -30,6 +66,24 @@ function App() {
 
   const handleIncrement = () => {
     console.log('Increment');
+    if (view === 'day') {
+      if (
+        day.getDate() === daysInMonth(day.getMonth() + 1, day.getFullYear())
+      ) {
+        if (day.getMonth() === 11) {
+          const nextDate = new Date(day.getFullYear() + 1, 0, 1);
+          setDay(nextDate);
+        }
+        const nextDate = new Date(day.getFullYear(), day.getMonth() + 1, 1);
+        setDay(nextDate);
+      }
+      const nextDate = new Date(
+        day.getFullYear(),
+        day.getMonth(),
+        day.getDate() + 1
+      );
+      setDay(nextDate);
+    }
     if (view === 'month') {
       if (month === 11) {
         setYear(year + 1);
@@ -43,11 +97,15 @@ function App() {
   const switchToDayView = () => {
     console.log('Day view');
     setView('day');
+    const currentDate = new Date();
+    setDay(currentDate);
   };
 
   const switchToWeekView = () => {
     console.log('Week view');
     setView('week');
+    const currentDate = new Date();
+    setDay(currentDate);
   };
 
   const switchToMonthView = () => {
@@ -58,8 +116,7 @@ function App() {
     setYear(currentDate.getFullYear());
   };
 
-  console.log(month, year);
-  console.log(Object.values(Month));
+  console.log(day);
 
   return (
     <>
@@ -73,8 +130,8 @@ function App() {
           switchToMonthView={switchToMonthView}
         />
         <Routes>
-          <Route path="/day" element={<h1>Day view doesn't exist yet!</h1>} />
-          <Route path="/week" element={<h1>Week view doesn't exist yet!</h1>} />
+          <Route path="/day" element={<DayPage day={day} />} />
+          <Route path="/week" element={<WeekPage day={day} />} />
           <Route
             path={`/month/:year/:month`}
             element={<MonthPage month={month} year={year} />}
