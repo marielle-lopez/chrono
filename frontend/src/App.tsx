@@ -7,8 +7,10 @@ import { Month } from './helpers/enums';
 import DayPage from './pages/DayPage/DayPage';
 import WeekPage from './pages/WeekPage/WeekPage';
 import { daysInMonth } from './helpers/functions';
+import Modal from './components/Modal/Modal';
 
 function App() {
+  const [isHidden, setIsHidden] = useState(true);
   const [view, setView] = useState('month');
   const [day, setDay] = useState(new Date());
   const [month, setMonth] = useState(-1);
@@ -121,6 +123,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <button onClick={() => setIsHidden(false)}>Show Modal</button>
+        <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
         <NavBar
           label={`${Object.values(Month)[month]} ${year}`}
           handleDecrement={handleDecrement}
