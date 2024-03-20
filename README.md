@@ -6,6 +6,12 @@
 
 ## Task Completion History
 
+### 20 March 2024
+
+- Worked on designing the Chrono logo
+- Begun constructing the `Modal` component to be dynamic
+- Made progress with the 'Week' view
+
 ### 19 March 2024
 
 - Made the 'Day' view functional, where the user can switch between adjacent days using the provided decrement and increment buttons
