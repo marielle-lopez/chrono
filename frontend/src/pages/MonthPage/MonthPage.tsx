@@ -1,12 +1,25 @@
 import CellHeaders from '../../components/CellHeaders/CellHeaders';
 import CellList from '../../containers/CellList/CellList';
 
-const MonthPage = ({ month, year }: { month: number; year: number }) => {
+const MonthPage = ({
+  setIsHidden,
+  month,
+  year,
+}: {
+  setIsHidden: (isHidden: boolean) => void;
+  month: number;
+  year: number;
+}) => {
   return (
     <main className="flex flex-col flex-grow">
       <CellHeaders />
       {month !== -1 && year !== -1 && (
-        <CellList view="month" year={year} month={month} />
+        <CellList
+          setIsHidden={setIsHidden}
+          view="month"
+          year={year}
+          month={month}
+        />
       )}
     </main>
   );
