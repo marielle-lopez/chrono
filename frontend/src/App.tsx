@@ -152,7 +152,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <button onClick={() => setIsHidden(false)}>Show Modal</button>
         <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
         <NavBar
           label={getNavBarLabel(view)}
