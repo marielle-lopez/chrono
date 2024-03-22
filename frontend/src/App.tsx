@@ -56,6 +56,13 @@ function App() {
       );
       setDay(previousDate);
     }
+    if (view === 'week') {
+      const previousWeekDate = new Date(
+        day.setDate(day.getDate() - day.getDay() - 7)
+      );
+      setDay(previousWeekDate);
+      return;
+    }
     if (view === 'month') {
       if (month === 0) {
         setYear(year - 1);
@@ -85,6 +92,13 @@ function App() {
         day.getDate() + 1
       );
       setDay(nextDate);
+    }
+    if (view === 'week') {
+      const nextWeekDate = new Date(
+        day.setDate(day.getDate() - day.getDay() + 7)
+      );
+      setDay(nextWeekDate);
+      return;
     }
     if (view === 'month') {
       if (month === 11) {
