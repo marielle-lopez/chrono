@@ -4,6 +4,7 @@ import { getDatesInWeek } from '../../helpers/functions';
 type Nullable<T> = T | undefined | null;
 
 interface CellListProps {
+  setIsHidden: (isHidden: boolean) => void;
   view?: Nullable<string>;
   day?: Nullable<Date>;
   month?: Nullable<number>;
@@ -11,6 +12,7 @@ interface CellListProps {
 }
 
 const CellList = ({
+  setIsHidden,
   view = null,
   day = null,
   month = null,
@@ -66,14 +68,18 @@ const CellList = ({
       {day && view === 'day' && (
         <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-stone-800">
           {hours?.map((hour) => (
-            <Cell key={hour} hour={hour} />
+            <Cell setIsHidden={setIsHidden} key={hour} hour={hour} />
           ))}
         </div>
       )}
       {day && view === 'week' && (
-        <div className="flex flex-grow gap-px gap-py px-px py-px bg-stone-800">
+        <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-stone-800">
           {days?.map((day) => (
-            <Cell key={day.getDate()} day={day.getDate()} />
+            <Cell
+              setIsHidden={setIsHidden}
+              key={day.getDate()}
+              day={day.getDate()}
+            />
           ))}
         </div>
       )}
@@ -83,7 +89,11 @@ const CellList = ({
             <Cell key={`dummy${dummyDay}`} day={0} />
           ))}
           {days.map((day) => (
-            <Cell key={day.getDate()} day={day.getDate()} />
+            <Cell
+              key={day.getDate()}
+              setIsHidden={setIsHidden}
+              day={day.getDate()}
+            />
           ))}
           {endDummyDays(days[days.length - 1]).map((dummyDay: number) => (
             <Cell key={`dummy${dummyDay}`} day={0} />
