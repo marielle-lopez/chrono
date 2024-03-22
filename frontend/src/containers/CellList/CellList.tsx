@@ -3,14 +3,28 @@ import Cell from '../../components/Cell/Cell';
 type Nullable<T> = T | undefined | null;
 
 interface CellListProps {
+  view?: Nullable<string>;
   day?: Nullable<Date>;
   month?: Nullable<number>;
   year?: Nullable<number>;
 }
 
-const CellList = ({ day = null, month = null, year = null }: CellListProps) => {
+const CellList = ({
+  view = null,
+  day = null,
+  month = null,
+  year = null,
+}: CellListProps) => {
   let hours;
   let days;
+
+  const getDatesInWeek = (date: Date): Date[] => {
+    return Array(7)
+      .fill(new Date(date))
+      .map(
+        (date, i) => new Date(date.setDate(date.getDate() - date.getDay() + i))
+      );
+  };
 
   const getDaysInMonth = (year: number, month: number): Date[] => {
     const date = new Date(year, month, 1);
@@ -46,13 +60,31 @@ const CellList = ({ day = null, month = null, year = null }: CellListProps) => {
     hours = [...Array(24).keys()];
   }
 
+  if (day !== null && view === 'week') {
+    days = getDatesInWeek(day);
+  }
+
   if (month !== null && year !== null) {
     days = getDaysInMonth(year, month);
   }
 
   return (
     <>
-      {days && (
+      {day && view === 'day' && (
+        <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-stone-800">
+          {hours?.map((hour) => (
+            <Cell key={hour} hour={hour} />
+          ))}
+        </div>
+      )}
+      {day && view === 'week' && (
+        <div className="flex flex-grow gap-px gap-py px-px py-px bg-stone-800">
+          {days?.map((day) => (
+            <Cell key={day.getDate()} day={day.getDate()} />
+          ))}
+        </div>
+      )}
+      {days && view === 'month' && (
         <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-stone-800">
           {startDummyDays(days[0]).map((dummyDay: number) => (
             <Cell key={`dummy${dummyDay}`} day={0} />
@@ -62,13 +94,6 @@ const CellList = ({ day = null, month = null, year = null }: CellListProps) => {
           ))}
           {endDummyDays(days[days.length - 1]).map((dummyDay: number) => (
             <Cell key={`dummy${dummyDay}`} day={0} />
-          ))}
-        </div>
-      )}
-      {day && (
-        <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-stone-800">
-          {hours?.map((hour) => (
-            <Cell key={hour} hour={hour} />
           ))}
         </div>
       )}
