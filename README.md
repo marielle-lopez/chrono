@@ -4,7 +4,16 @@
 
 - [Inter font](https://fonts.google.com/specimen/Inter)
 
+### Bits and Bobs
+
+- [Array of all days in the week of a given date](https://stackoverflow.com/questions/71179131/how-do-i-get-an-array-of-all-days-in-the-week-given-the-current-date-in-javascri)
+
 ## Task Completion History
+
+### 22 March 2024
+
+- Fully implemented 'Week' view
+  - User is able to switch between adjacent weeks using the decrement and increment buttons
 
 ### 20 March 2024
 
