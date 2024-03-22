@@ -14,7 +14,9 @@ const Cell = ({ hour = null, day = null }: CellProps) => {
         ''
       )}
       {day || day === 0 ? (
-        <div className="flex bg-stone-900">{day !== 0 ? day : ''}</div>
+        <div className="flex flex-grow bg-stone-900">
+          {day !== 0 ? day : ''}
+        </div>
       ) : (
         ''
       )}
