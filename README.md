@@ -15,6 +15,7 @@
 - Fully implemented 'Week' view
   - User is able to switch between adjacent weeks using the decrement and increment buttons
 - Text between the decrement and increment buttons of the `NavBar` component is now appropriate to the selected view
+- Allowed `Modal` component to have its appearance triggered when non-dummy `Cell` components are clicked by a user
 
 ### 20 March 2024
 
