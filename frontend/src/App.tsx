@@ -163,13 +163,26 @@ function App() {
           switchToMonthView={switchToMonthView}
         />
         <Routes>
-          <Route path="/day" element={<DayPage day={day} />} />
-          <Route path="/week" element={<WeekPage day={day} />} />
+          <Route
+            path="/day"
+            element={<DayPage day={day} setIsHidden={setIsHidden} />}
+          />
+          <Route
+            path="/week"
+            element={<WeekPage day={day} setIsHidden={setIsHidden} />}
+          />
           <Route
             path={`/month/:year/:month`}
-            element={<MonthPage month={month} year={year} />}
+            element={
+              <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
+            }
           />
-          <Route path="*" element={<MonthPage month={month} year={year} />} />
+          <Route
+            path="*"
+            element={
+              <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
