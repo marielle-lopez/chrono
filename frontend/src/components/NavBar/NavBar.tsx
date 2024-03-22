@@ -21,6 +21,16 @@ const NavBar = ({
 }: NavBarProps) => {
   return (
     <div className="flex justify-between items-center bg-stone-900">
+      <div className="flex">
+        <h1 className="flex items-center font-accent font-extralight text-2xl">
+          <img
+            className="h-3.5 mt-0.5"
+            src="/src/assets/icons/logo-thumbnail.png"
+            alt="Chrono logo thumbnail"
+          />
+          hrono
+        </h1>
+      </div>
       <div className="flex gap-2">
         <Button handleClick={handleDecrement}>
           <FaChevronLeft className="h-3" />
