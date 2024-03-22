@@ -3,6 +3,7 @@
 ## Resources
 
 - [Inter font](https://fonts.google.com/specimen/Inter)
+- [MuseoModerno font](https://fonts.google.com/specimen/MuseoModerno)
 
 ### Bits and Bobs
 
@@ -18,6 +19,7 @@
 - Allowed `Modal` component to have its appearance triggered when non-dummy `Cell` components are clicked by a user
 - Added `type` prop to `Button` component to alter its appearance based on the value of `type`
 - Updated styling of `Modal` component and implemented `Button` component
+- Added Chrono logo to the `NavBar` component
 
 ### 20 March 2024
 
