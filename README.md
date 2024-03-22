@@ -1,4 +1,8 @@
-# Chrono
+# <img src='./logo-lg.png' alt='Chrono logo' width='300'/>
+
+Introducing Chrono, your ultimate calendar companion designed to streamline your schedule while keeping you weather-ready. Chrono seamlessly blends intuitive event management with up-to-date weather forecasts, ensuring you're always prepared for whatever the day brings.
+
+Sleek and user-friendly, Chrono offers a clean interface that prioritizes functionality without sacrificing style. Its intuitive design makes navigating your schedule a breeze, allowing you to focus on what matters most—making the most of your time.
 
 ## Resources
 
