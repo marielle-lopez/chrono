@@ -16,6 +16,8 @@
   - User is able to switch between adjacent weeks using the decrement and increment buttons
 - Text between the decrement and increment buttons of the `NavBar` component is now appropriate to the selected view
 - Allowed `Modal` component to have its appearance triggered when non-dummy `Cell` components are clicked by a user
+- Added `type` prop to `Button` component to alter its appearance based on the value of `type`
+- Updated styling of `Modal` component and implemented `Button` component
 
 ### 20 March 2024
 
