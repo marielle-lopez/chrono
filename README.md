@@ -14,6 +14,7 @@
 
 - Fully implemented 'Week' view
   - User is able to switch between adjacent weeks using the decrement and increment buttons
+- Text between the decrement and increment buttons of the `NavBar` component is now appropriate to the selected view
 
 ### 20 March 2024
 
