@@ -20,14 +20,14 @@ const NavBar = ({
   switchToMonthView,
 }: NavBarProps) => {
   return (
-    <div className="flex justify-between bg-stone-900">
-      <div className="flex">
+    <div className="flex justify-between items-center bg-stone-900">
+      <div className="flex gap-2">
         <Button handleClick={handleDecrement}>
-          <FaChevronLeft />
+          <FaChevronLeft className="h-3" />
         </Button>
-        {label}
+        <p className="flex items-center">{label}</p>
         <Button handleClick={handleIncrement}>
-          <FaChevronRight />
+          <FaChevronRight className="h-3" />
         </Button>
       </div>
       <div>
