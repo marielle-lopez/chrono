@@ -7,7 +7,6 @@ interface CellProps {
 }
 
 const Cell = ({ setIsHidden = null, hour = null, day = null }: CellProps) => {
-  console.log(hour);
   return (
     <>
       {(hour || hour === 0) && setIsHidden && (
