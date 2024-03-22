@@ -8,7 +8,7 @@ const DayPage = ({ day }: { day: Date }) => {
         {Object.values(Day)[day.getDay()]} {day.getDate()}{' '}
         {Object.values(Month)[day.getMonth()]} {day.getFullYear()}
       </h1>
-      <CellList day={day} />
+      <CellList view="day" day={day} />
     </main>
   );
 };
