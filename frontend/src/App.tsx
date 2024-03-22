@@ -3,10 +3,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import MonthPage from './pages/MonthPage/MonthPage';
-import { Month } from './helpers/enums';
+import { Day, Month } from './helpers/enums';
 import DayPage from './pages/DayPage/DayPage';
 import WeekPage from './pages/WeekPage/WeekPage';
-import { daysInMonth } from './helpers/functions';
+import {
+  daysInMonth,
+  formatDateToString,
+  getDatesInWeek,
+} from './helpers/functions';
 import Modal from './components/Modal/Modal';
 
 function App() {
@@ -23,7 +27,6 @@ function App() {
   }, []);
 
   const handleDecrement = () => {
-    console.log('Decrement');
     if (view === 'day') {
       if (day.getDate() === 1) {
         let previousMonth = day.getMonth() - 1;
@@ -74,7 +77,6 @@ function App() {
   };
 
   const handleIncrement = () => {
-    console.log('Increment');
     if (view === 'day') {
       if (
         day.getDate() === daysInMonth(day.getMonth() + 1, day.getFullYear())
@@ -111,28 +113,41 @@ function App() {
   };
 
   const switchToDayView = () => {
-    console.log('Day view');
     setView('day');
     const currentDate = new Date();
     setDay(currentDate);
   };
 
   const switchToWeekView = () => {
-    console.log('Week view');
     setView('week');
     const currentDate = new Date();
     setDay(currentDate);
   };
 
   const switchToMonthView = () => {
-    console.log('Month view');
     setView('month');
     const currentDate = new Date();
     setMonth(currentDate.getMonth());
     setYear(currentDate.getFullYear());
   };
 
-  console.log(day);
+  const getNavBarLabel = (view: string): string => {
+    if (view === 'day') {
+      return `${Object.values(Day)[day.getDay()]} ${day.getDate()} ${
+        Object.values(Month)[day.getMonth()]
+      } ${day.getFullYear()}`;
+    }
+    if (view === 'week') {
+      const datesInWeek = getDatesInWeek(day);
+      return `${formatDateToString(datesInWeek[0])} - ${formatDateToString(
+        datesInWeek[datesInWeek.length - 1]
+      )}`;
+    }
+    if (view === 'month') {
+      return `${Object.values(Month)[month]} ${year}`;
+    }
+    return 'NavBar label could not be generated';
+  };
 
   return (
     <>
@@ -140,7 +155,7 @@ function App() {
         <button onClick={() => setIsHidden(false)}>Show Modal</button>
         <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
         <NavBar
-          label={`${Object.values(Month)[month]} ${year}`}
+          label={getNavBarLabel(view)}
           handleDecrement={handleDecrement}
           handleIncrement={handleIncrement}
           switchToDayView={switchToDayView}
