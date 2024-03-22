@@ -1,4 +1,5 @@
 import Cell from '../../components/Cell/Cell';
+import { getDatesInWeek } from '../../helpers/functions';
 
 type Nullable<T> = T | undefined | null;
 
@@ -17,14 +18,6 @@ const CellList = ({
 }: CellListProps) => {
   let hours;
   let days;
-
-  const getDatesInWeek = (date: Date): Date[] => {
-    return Array(7)
-      .fill(new Date(date))
-      .map(
-        (date, i) => new Date(date.setDate(date.getDate() - date.getDay() + i))
-      );
-  };
 
   const getDaysInMonth = (year: number, month: number): Date[] => {
     const date = new Date(year, month, 1);

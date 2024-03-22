@@ -12,3 +12,11 @@ export const formatDateToString = (date: Date): string => {
 
   return `${day} ${dateNum} ${month} ${year}`;
 };
+
+export const getDatesInWeek = (date: Date): Date[] => {
+  return Array(7)
+    .fill(new Date(date))
+    .map(
+      (date, i) => new Date(date.setDate(date.getDate() - date.getDay() + i))
+    );
+};
