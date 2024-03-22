@@ -5,7 +5,9 @@ const MonthPage = ({ month, year }: { month: number; year: number }) => {
   return (
     <main className="flex flex-col flex-grow">
       <CellHeaders />
-      {month !== -1 && year !== -1 && <CellList year={year} month={month} />}
+      {month !== -1 && year !== -1 && (
+        <CellList view="month" year={year} month={month} />
+      )}
     </main>
   );
 };
