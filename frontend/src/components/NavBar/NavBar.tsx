@@ -20,7 +20,7 @@ const NavBar = ({
   switchToMonthView,
 }: NavBarProps) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mb-6">
       <div className="flex w-1/3">
         <h1 className="flex items-center font-accent font-extralight text-2xl">
           <img
