@@ -21,6 +21,8 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
   - Apply specific styling to active `NavLink`s
   - Modify width of content
   - Alter alignment and spacing
+- Update background overlay styling of `Modal` component to be also dark, not just blurred
+- Create `MainWrapper` container component to reduce repeated styling for pages originally using the `<main>` tag, then implemented the `MainWrapper` container in page components
 
 ### 22 March 2024
 
