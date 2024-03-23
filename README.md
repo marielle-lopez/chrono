@@ -15,6 +15,13 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
 
 ## Task Completion History
 
+### 23 March 2024
+
+- Adjust styling of `NavBar` component
+  - Apply specific styling to active `NavLink`s
+  - Modify width of content
+  - Alter alignment and spacing
+
 ### 22 March 2024
 
 - Fully implemented 'Week' view
