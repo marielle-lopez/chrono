@@ -17,9 +17,9 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`py-1 border border-stone-700 rounded-md bg-stone-800 ${
+      className={`py-1 h-fit border border-stone-700 rounded-md ${
         label !== null ? 'px-3' : 'px-1'
-      } ${type === 'primary' && 'bg-lime-400 border-none text-black'}`}
+      } ${type === 'primary' ? 'bg-lime-400 border-none text-black' : 'bg-stone-800'}`}
       onClick={handleClick}
     >
       {children && children}
