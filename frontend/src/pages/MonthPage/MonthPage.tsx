@@ -1,5 +1,6 @@
 import CellHeaders from '../../components/CellHeaders/CellHeaders';
 import CellList from '../../containers/CellList/CellList';
+import MainWrapper from '../../containers/MainWrapper/MainWrapper';
 
 const MonthPage = ({
   setIsHidden,
@@ -11,7 +12,7 @@ const MonthPage = ({
   year: number;
 }) => {
   return (
-    <main className="flex flex-col flex-grow">
+    <MainWrapper>
       <CellHeaders />
       {month !== -1 && year !== -1 && (
         <CellList
@@ -21,7 +22,8 @@ const MonthPage = ({
           month={month}
         />
       )}
-    </main>
+    </MainWrapper>
+
   );
 };
 

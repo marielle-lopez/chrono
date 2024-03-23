@@ -1,4 +1,5 @@
 import CellList from '../../containers/CellList/CellList';
+import MainWrapper from '../../containers/MainWrapper/MainWrapper';
 
 const DayPage = ({
   day,
@@ -8,9 +9,9 @@ const DayPage = ({
   setIsHidden: (isHidden: boolean) => void;
 }) => {
   return (
-    <main className="flex flex-col flex-grow">
+    <MainWrapper>
       <CellList view="day" day={day} setIsHidden={setIsHidden} />
-    </main>
+    </MainWrapper>
   );
 };
 
