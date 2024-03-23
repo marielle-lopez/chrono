@@ -10,7 +10,7 @@ const Modal = ({ isHidden, setIsHidden }: ModalProps) => {
   return (
     <>
       <div
-        className={`w-full h-full fixed backdrop-blur-sm ${
+        className={`w-full h-full fixed backdrop-brightness-50 backdrop-blur-sm ${
           isHidden && 'hidden'
         }`}
       ></div>
