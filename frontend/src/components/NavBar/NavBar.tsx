@@ -20,8 +20,8 @@ const NavBar = ({
   switchToMonthView,
 }: NavBarProps) => {
   return (
-    <div className="flex justify-between items-center bg-stone-900">
-      <div className="flex">
+    <div className="flex justify-between items-center">
+      <div className="flex w-1/3">
         <h1 className="flex items-center font-accent font-extralight text-2xl">
           <img
             className="h-3.5 mt-0.5"
@@ -31,24 +31,24 @@ const NavBar = ({
           hrono
         </h1>
       </div>
-      <div className="flex gap-2">
+      <div className="flex justify-center items-center w-1/3 gap-2">
         <Button handleClick={handleDecrement}>
           <FaChevronLeft className="h-3" />
         </Button>
-        <p className="flex items-center">{label}</p>
+        <p className="flex text-center items-center">{label}</p>
         <Button handleClick={handleIncrement}>
           <FaChevronRight className="h-3" />
         </Button>
       </div>
-      <div>
-        <NavLink to="/day">
-          <Button label="Day" handleClick={switchToDayView} />
+      <div className='flex justify-end w-1/3 gap-2'>
+        <NavLink to="/day" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToDayView}>
+          Day
         </NavLink>
-        <NavLink to="/week">
-          <Button label="Week" handleClick={switchToWeekView} />
+        <NavLink to="/week" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToWeekView}>
+          Week
         </NavLink>
-        <NavLink to="/month">
-          <Button label="Month" handleClick={switchToMonthView} />
+        <NavLink to="/month" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToMonthView}>
+          Month
         </NavLink>
       </div>
     </div>
