@@ -22,14 +22,16 @@ const NavBar = ({
   return (
     <div className="flex justify-between items-center mb-6">
       <div className="flex w-1/3">
-        <h1 className="flex items-center font-accent font-extralight text-2xl">
-          <img
-            className="h-3.5 mt-0.5"
-            src="/src/assets/icons/logo-thumbnail.png"
-            alt="Chrono logo thumbnail"
-          />
-          hrono
-        </h1>
+        {/* <img
+          className="h-6"
+          src="./src/assets/logo/logo-lg.png"
+          alt="Chrono logo"
+        /> */}
+        <img
+          className="h-6"
+          src="./src/assets/logo/logo-thumbnail.png"
+          alt="Chrono thumbnail logo"
+        />
       </div>
       <div className="flex justify-center items-center w-1/3 gap-2">
         <Button handleClick={handleDecrement}>
@@ -40,14 +42,38 @@ const NavBar = ({
           <FaChevronRight className="h-3" />
         </Button>
       </div>
-      <div className='flex justify-end w-1/3 gap-2'>
-        <NavLink to="/day" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToDayView}>
+      <div className="flex justify-end w-1/3 gap-2">
+        <NavLink
+          to="/day"
+          className={({ isActive }) =>
+            isActive
+              ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
+              : 'text-sm'
+          }
+          onClick={switchToDayView}
+        >
           Day
         </NavLink>
-        <NavLink to="/week" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToWeekView}>
+        <NavLink
+          to="/week"
+          className={({ isActive }) =>
+            isActive
+              ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
+              : 'text-sm'
+          }
+          onClick={switchToWeekView}
+        >
           Week
         </NavLink>
-        <NavLink to="/month" className={({isActive}) => isActive ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md' : 'text-sm'} onClick={switchToMonthView}>
+        <NavLink
+          to="/month"
+          className={({ isActive }) =>
+            isActive
+              ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
+              : 'text-sm'
+          }
+          onClick={switchToMonthView}
+        >
           Month
         </NavLink>
       </div>
