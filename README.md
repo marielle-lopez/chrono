@@ -16,6 +16,11 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
 
 ## Task Completion History
 
+### 25 March 2024
+
+- Designed and constructed `EventCard` component
+  - This component will display in a `Cell` of a corresponding date, showing the event title and time
+
 ### 24 March 2024
 
 - Re-designed Chrono logo and utilised this new version
