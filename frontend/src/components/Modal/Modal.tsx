@@ -20,17 +20,17 @@ const Modal = ({ isHidden, setIsHidden, children }: ModalProps) => {
           isHidden && 'hidden'
         }`}
       >
-        <div className="flex flex-col justify-between w-96 h-60 bg-black rounded-lg px-4 py-4 shadow-xl">
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-col justify-between min-w-96 min-h-60 bg-black rounded-lg px-4 py-4 shadow-xl">
+          <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <h2 className="text-xl font-bold">Modal Heading</h2>
               <button onClick={() => setIsHidden(true)}>
                 <FaXmark />
               </button>
             </div>
-            <div>{children}</div>
+            <div className="flex flex-grow">{children}</div>
           </div>
-          <div className="flex justify-end gap-3">
+          <div className="flex justify-end gap-3 mt-6">
             <Button handleClick={() => setIsHidden(true)} label="Cancel" />
             <Button
               handleClick={() =>
