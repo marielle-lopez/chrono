@@ -4,9 +4,10 @@ import Button from '../Button/Button';
 interface ModalProps {
   isHidden: boolean;
   setIsHidden: (isHidden: boolean) => void;
+  children: any;
 }
 
-const Modal = ({ isHidden, setIsHidden }: ModalProps) => {
+const Modal = ({ isHidden, setIsHidden, children }: ModalProps) => {
   return (
     <>
       <div
@@ -27,9 +28,7 @@ const Modal = ({ isHidden, setIsHidden }: ModalProps) => {
                 <FaXmark />
               </button>
             </div>
-            <div>
-              <p>Modal Body</p>
-            </div>
+            <div>{children}</div>
           </div>
           <div className="flex justify-end gap-3">
             <Button handleClick={() => setIsHidden(true)} label="Cancel" />
