@@ -1,13 +1,23 @@
 import { FaXmark } from 'react-icons/fa6';
 import Button from '../Button/Button';
 
+type Nullable<T> = T | undefined | null;
+
 interface ModalProps {
   isHidden: boolean;
   setIsHidden: (isHidden: boolean) => void;
   children: any;
+  handleSubmit: () => void;
+  displayFooter?: Nullable<boolean>;
 }
 
-const Modal = ({ isHidden, setIsHidden, children }: ModalProps) => {
+const Modal = ({
+  isHidden,
+  setIsHidden,
+  children,
+  handleSubmit,
+  displayFooter = false,
+}: ModalProps) => {
   return (
     <>
       <div
@@ -30,16 +40,16 @@ const Modal = ({ isHidden, setIsHidden, children }: ModalProps) => {
             </div>
             <div className="flex flex-grow">{children}</div>
           </div>
-          <div className="flex justify-end gap-3 mt-6">
-            <Button handleClick={() => setIsHidden(true)} label="Cancel" />
-            <Button
-              handleClick={() =>
-                console.log('Primary button clicked in Modal component')
-              }
-              label="Primary"
-              type="primary"
-            />
-          </div>
+          {displayFooter && (
+            <div className="flex justify-end gap-3 mt-6">
+              <Button handleClick={() => setIsHidden(true)} label="Cancel" />
+              <Button
+                handleClick={handleSubmit}
+                label="Primary"
+                type="primary"
+              />
+            </div>
+          )}
         </div>
       </div>
     </>
