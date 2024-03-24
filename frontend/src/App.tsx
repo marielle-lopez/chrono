@@ -12,6 +12,7 @@ import {
   getDatesInWeek,
 } from './helpers/functions';
 import Modal from './components/Modal/Modal';
+import EventForm from './components/EventForm/EventForm';
 
 function App() {
   const [isHidden, setIsHidden] = useState(true);
@@ -152,7 +153,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Modal isHidden={isHidden} setIsHidden={setIsHidden} />
+        <Modal isHidden={isHidden} setIsHidden={setIsHidden}>
+          <EventForm />
+        </Modal>
         <NavBar
           label={getNavBarLabel(view)}
           handleDecrement={handleDecrement}
@@ -171,7 +174,7 @@ function App() {
             element={<WeekPage day={day} setIsHidden={setIsHidden} />}
           />
           <Route
-            path={`/month/:year/:month`}
+            path={`/month`}
             element={
               <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
             }
