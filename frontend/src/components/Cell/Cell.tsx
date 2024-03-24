@@ -1,3 +1,5 @@
+import EventCard from '../EventCard/EventCard';
+
 type Nullable<T> = T | undefined | null;
 
 interface CellProps {
@@ -24,10 +26,11 @@ const Cell = ({ setIsHidden = null, hour = null, day = null }: CellProps) => {
       )}
       {(day || day === 0) && setIsHidden && (
         <div
-          className="flex flex-grow bg-stone-900"
+          className="flex flex-col flex-grow bg-stone-900 px-2 py-1"
           onClick={() => setIsHidden(false)}
         >
           {day !== 0 ? day : ''}
+          <EventCard />
         </div>
       )}
     </>
