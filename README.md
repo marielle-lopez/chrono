@@ -7,13 +7,24 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
 ## Resources
 
 - [Inter font](https://fonts.google.com/specimen/Inter)
-- [MuseoModerno font](https://fonts.google.com/specimen/MuseoModerno)
+- [Sora font](https://fonts.google.com/specimen/Sora)
 
 ### Bits and Bobs
 
 - [Array of all days in the week of a given date](https://stackoverflow.com/questions/71179131/how-do-i-get-an-array-of-all-days-in-the-week-given-the-current-date-in-javascri)
+- [Type 'FieldError' is not assignable to type 'string'](https://github.com/orgs/react-hook-form/discussions/8915)
 
 ## Task Completion History
+
+### 24 March 2024
+
+- Re-designed Chrono logo and utilised this new version
+  - The first version was simple and minimalistic, however I did not feel as if it matched the modern and sleek vibe I was going for
+- Created `EventForm` component which holds a form a user can fill out to offer information of an event they would like to create on a certain date and time
+  - The form uses React Hook Form and Zod to handle form submission and validation, respectively
+  - I ran into a small bug with form submission, however I realised that in order for a form to be submitted, the form must have a button between its `<form></form>` tags
+- Made the `Modal` component further dynamic by allowing it to receive the `children` prop, which will be the 'body' content of the modal
+  - Additionally, I made the footer of the `Modal` component optional since `EventForm` has its own button
 
 ### 23 March 2024
 
