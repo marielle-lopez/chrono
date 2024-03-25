@@ -6,9 +6,19 @@ interface CellProps {
   setIsHidden?: Nullable<(isHidden: boolean) => void>;
   hour?: Nullable<number>;
   day?: Nullable<number>;
+  events?: Nullable<Event[]>;
+  date?: Nullable<Date>;
 }
 
-const Cell = ({ setIsHidden = null, hour = null, day = null }: CellProps) => {
+const Cell = ({
+  setIsHidden = null,
+  hour = null,
+  day = null,
+  events = null,
+  date = null,
+}: CellProps) => {
+  console.log(date, date?.toDateString(), events);
+
   return (
     <>
       {(hour || hour === 0) && setIsHidden && (
@@ -30,7 +40,8 @@ const Cell = ({ setIsHidden = null, hour = null, day = null }: CellProps) => {
           onClick={() => setIsHidden(false)}
         >
           {day !== 0 ? day : ''}
-          <EventCard />
+          {events &&
+            events.map((event) => <EventCard key={event.name} event={event} />)}
         </div>
       )}
     </>
