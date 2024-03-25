@@ -176,7 +176,9 @@ function App() {
           />
           <Route
             path="/week"
-            element={<WeekPage day={day} setIsHidden={setIsHidden} />}
+            element={
+              <WeekPage day={day} setIsHidden={setIsHidden} events={events} />
+            }
           />
           <Route
             path={`/month`}
