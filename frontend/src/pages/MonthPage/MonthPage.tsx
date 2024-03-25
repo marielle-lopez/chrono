@@ -6,10 +6,12 @@ const MonthPage = ({
   setIsHidden,
   month,
   year,
+  events,
 }: {
   setIsHidden: (isHidden: boolean) => void;
   month: number;
   year: number;
+  events: Event[];
 }) => {
   return (
     <MainWrapper>
@@ -20,10 +22,10 @@ const MonthPage = ({
           view="month"
           year={year}
           month={month}
+          events={events}
         />
       )}
     </MainWrapper>
-
   );
 };
 
