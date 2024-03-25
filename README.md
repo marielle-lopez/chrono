@@ -26,11 +26,13 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
   - This component will display in a `Cell` of a corresponding date, showing the event title and time
   - Ran into a small bug where content of rendered `EventCard` components would appear on top of the `Modal` component; this was simply fixed by moving the call for the `Modal` component to the end in the return statement in `App.tsx`
 - A user can create an event which will be saved in an array named `events` saved in state
-  - The event will render in a `Cell` with a matching start date; works for the 'Week' and 'Month' views
+  - The event will render in a `Cell` with a matching start date; works for all views
   - There is currently a bug associated with colour styling in the `EventCard` component
 - To make the `Modal` component dynamic in terms of its body content, I need to create a function that will return a component which I will use to conditionally render the `children` prop of the `Modal` component
   - Initially, I was thinking about storing TSX in state, however this is bad practice; state is for data
 - Updated logo design of Chrono
+- Rendered `EventCard` components are clickable
+  - When clicked, `Modal` component appears with information of the related event
 
 ### 24 March 2024
 
