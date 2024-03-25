@@ -20,6 +20,8 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
 
 - Designed and constructed `EventCard` component
   - This component will display in a `Cell` of a corresponding date, showing the event title and time
+  - Ran into a small bug where content of rendered `EventCard` components would appear on top of the `Modal` component; this was simply fixed by moving the call for the `Modal` component to the end in the return statement in `App.tsx`
+- A user can create an event which will be saved in an array named `events` saved in state
 
 ### 24 March 2024
 
