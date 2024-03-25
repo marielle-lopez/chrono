@@ -20,3 +20,12 @@ export const getDatesInWeek = (date: Date): Date[] => {
       (date, i) => new Date(date.setDate(date.getDate() - date.getDay() + i))
     );
 };
+
+export const getDifferenceBetweenDates = (
+  startDate: Date,
+  endDate: Date
+): number => {
+  return Math.round(
+    (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
+  );
+};
