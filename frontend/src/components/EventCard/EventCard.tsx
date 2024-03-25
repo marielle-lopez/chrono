@@ -1,4 +1,10 @@
-const EventCard = ({ event }: { event: Event }) => {
+const EventCard = ({
+  event,
+  setEvent,
+}: {
+  event: Event;
+  setEvent: (event: Event) => void;
+}) => {
   const label = () => {
     if (event.label === 'Personal') {
       return 'lime';
@@ -15,7 +21,10 @@ const EventCard = ({ event }: { event: Event }) => {
   const colour = label();
 
   return (
-    <div className={`bg-${colour}-400 bg-opacity-20 px-2 py-1 rounded-sm`}>
+    <div
+      className={`bg-${colour}-400 bg-opacity-20 px-2 py-1 rounded-sm hover:bg-black`}
+      onClick={() => setEvent(event)}
+    >
       <div
         className={`border-l-2 border-dotted border-${colour}-400 border-opacity-50`}
       >
