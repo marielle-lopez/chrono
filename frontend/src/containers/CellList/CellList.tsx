@@ -10,6 +10,7 @@ interface CellListProps {
   month?: Nullable<number>;
   year?: Nullable<number>;
   events: Event[];
+  setEvent: (event: Event) => void;
 }
 
 const CellList = ({
@@ -19,6 +20,7 @@ const CellList = ({
   month = null,
   year = null,
   events,
+  setEvent,
 }: CellListProps) => {
   let hours;
   let days;
@@ -65,12 +67,24 @@ const CellList = ({
     days = getDaysInMonth(year, month);
   }
 
+  // console.log(events.map((event) => event.startDate.getHours()));
+
   return (
     <>
       {day && view === 'day' && (
         <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-stone-800">
           {hours?.map((hour) => (
-            <Cell setIsHidden={setIsHidden} key={hour} hour={hour} />
+            <Cell
+              setIsHidden={setIsHidden}
+              key={hour}
+              hour={hour}
+              events={events.filter(
+                (event) =>
+                  event.startDate.toDateString() === day.toDateString() &&
+                  event.startDate.getHours() === hour
+              )}
+              setEvent={setEvent}
+            />
           ))}
         </div>
       )}
@@ -84,6 +98,7 @@ const CellList = ({
               events={events.filter(
                 (event) => event.startDate.toDateString() === day.toDateString()
               )}
+              setEvent={setEvent}
             />
           ))}
         </div>
@@ -102,6 +117,7 @@ const CellList = ({
               events={events.filter(
                 (event) => event.startDate.toDateString() === day.toDateString()
               )}
+              setEvent={setEvent}
             />
           ))}
           {endDummyDays(days[days.length - 1]).map((dummyDay: number) => (
