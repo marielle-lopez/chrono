@@ -20,13 +20,8 @@ function App() {
   const [day, setDay] = useState(new Date());
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
-  const [events, setEvents] = useState<object[]>([]);
-
-  const formSubmit = (data: object) => {
-    setEvents([...events, data]);
-  };
-
-  console.log(events);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [body, setBody] = useState();
 
   useEffect(() => {
     const currentDate = new Date();
@@ -157,6 +152,12 @@ function App() {
     return 'NavBar label could not be generated';
   };
 
+  const formSubmit = (data: Event) => {
+    setEvents([...events, data]);
+  };
+
+  console.log(events);
+
   return (
     <>
       <BrowserRouter>
@@ -180,15 +181,20 @@ function App() {
           <Route
             path={`/month`}
             element={
-              <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
+              <MonthPage
+                month={month}
+                year={year}
+                setIsHidden={setIsHidden}
+                events={events}
+              />
             }
           />
-          <Route
+          {/* <Route
             path="*"
             element={
               <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
             }
-          />
+          /> */}
         </Routes>
         <Modal
           isHidden={isHidden}
