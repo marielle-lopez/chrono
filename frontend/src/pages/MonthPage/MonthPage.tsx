@@ -7,11 +7,13 @@ const MonthPage = ({
   month,
   year,
   events,
+  setEvent,
 }: {
   setIsHidden: (isHidden: boolean) => void;
   month: number;
   year: number;
   events: Event[];
+  setEvent: (event: Event) => void;
 }) => {
   return (
     <MainWrapper>
@@ -23,6 +25,7 @@ const MonthPage = ({
           year={year}
           month={month}
           events={events}
+          setEvent={setEvent}
         />
       )}
     </MainWrapper>

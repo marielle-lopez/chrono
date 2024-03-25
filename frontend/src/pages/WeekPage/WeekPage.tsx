@@ -6,10 +6,12 @@ const WeekPage = ({
   setIsHidden,
   day,
   events,
+  setEvent,
 }: {
   setIsHidden: (isHidden: boolean) => void;
   day: Date;
   events: Event[];
+  setEvent: (event: Event) => void;
 }) => {
   return (
     <MainWrapper>
@@ -19,6 +21,7 @@ const WeekPage = ({
         view="week"
         day={day}
         events={events}
+        setEvent={setEvent}
       />
     </MainWrapper>
   );
