@@ -20,6 +20,13 @@ function App() {
   const [day, setDay] = useState(new Date());
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
+  const [events, setEvents] = useState<object[]>([]);
+
+  const formSubmit = (data: object) => {
+    setEvents([...events, data]);
+  };
+
+  console.log(events);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -153,9 +160,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Modal isHidden={isHidden} setIsHidden={setIsHidden}>
-          <EventForm />
-        </Modal>
         <NavBar
           label={getNavBarLabel(view)}
           handleDecrement={handleDecrement}
@@ -186,6 +190,13 @@ function App() {
             }
           />
         </Routes>
+        <Modal
+          isHidden={isHidden}
+          setIsHidden={setIsHidden}
+          handleSubmit={() => console.log('Submit button clicked!')}
+        >
+          <EventForm formSubmit={formSubmit} />
+        </Modal>
       </BrowserRouter>
     </>
   );
