@@ -32,8 +32,6 @@ const CellList = ({
       date.setDate(date.getDate() + 1);
     }
 
-    console.log(days);
-
     return days;
   };
 
@@ -83,6 +81,9 @@ const CellList = ({
               setIsHidden={setIsHidden}
               key={day.getDate()}
               day={day.getDate()}
+              events={events.filter(
+                (event) => event.startDate.toDateString() === day.toDateString()
+              )}
             />
           ))}
         </div>
