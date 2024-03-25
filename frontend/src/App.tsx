@@ -10,9 +10,12 @@ import {
   daysInMonth,
   formatDateToString,
   getDatesInWeek,
+  getDifferenceBetweenDates,
 } from './helpers/functions';
 import Modal from './components/Modal/Modal';
 import EventForm from './components/EventForm/EventForm';
+import { FaLocationDot } from 'react-icons/fa6';
+import { LuCalendarClock } from 'react-icons/lu';
 
 function App() {
   const [isHidden, setIsHidden] = useState(true);
@@ -21,7 +24,7 @@ function App() {
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
   const [events, setEvents] = useState<Event[]>([]);
-  const [body, setBody] = useState();
+  const [event, setEvent] = useState();
 
   useEffect(() => {
     const currentDate = new Date();
@@ -156,7 +159,50 @@ function App() {
     setEvents([...events, data]);
   };
 
-  console.log(events);
+  const updateModalBody = (bodyContent: string) => {
+    if (bodyContent === 'event' && event) {
+      const today = new Date();
+
+      return (
+        <>
+          <div className="flex gap-6">
+            <span className="flex items-center gap-2">
+              <FaLocationDot />
+              <p>{event.location}</p>
+            </span>
+            <span className="flex items-center gap-2">
+              <LuCalendarClock />
+              <p>
+                {getDifferenceBetweenDates(event.startDate, today)} days left
+              </p>
+            </span>
+          </div>
+          <p>
+            {event.startDate.toLocaleString()} -{' '}
+            {event.endDate.toLocaleString()}
+          </p>
+        </>
+      );
+    }
+    if (bodyContent === 'form') {
+      return <EventForm formSubmit={formSubmit} />;
+    }
+  };
+
+  useEffect(() => {
+    if (event) {
+      console.log('triggered');
+      updateModalBody('event');
+      return;
+    }
+    updateModalBody('form');
+  }, [event]);
+
+  useEffect(() => {
+    if (isHidden && event) {
+      setEvent(null);
+    }
+  }, [isHidden]);
 
   return (
     <>
@@ -172,12 +218,24 @@ function App() {
         <Routes>
           <Route
             path="/day"
-            element={<DayPage day={day} setIsHidden={setIsHidden} />}
+            element={
+              <DayPage
+                day={day}
+                setIsHidden={setIsHidden}
+                events={events}
+                setEvent={setEvent}
+              />
+            }
           />
           <Route
             path="/week"
             element={
-              <WeekPage day={day} setIsHidden={setIsHidden} events={events} />
+              <WeekPage
+                day={day}
+                setIsHidden={setIsHidden}
+                events={events}
+                setEvent={setEvent}
+              />
             }
           />
           <Route
@@ -188,6 +246,7 @@ function App() {
                 year={year}
                 setIsHidden={setIsHidden}
                 events={events}
+                setEvent={setEvent}
               />
             }
           />
@@ -199,11 +258,12 @@ function App() {
           /> */}
         </Routes>
         <Modal
+          heading={event ? event.name : 'Create an event'}
           isHidden={isHidden}
           setIsHidden={setIsHidden}
           handleSubmit={() => console.log('Submit button clicked!')}
         >
-          <EventForm formSubmit={formSubmit} />
+          {!event ? updateModalBody('form') : updateModalBody('event')}
         </Modal>
       </BrowserRouter>
     </>
