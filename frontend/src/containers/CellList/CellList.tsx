@@ -9,6 +9,7 @@ interface CellListProps {
   day?: Nullable<Date>;
   month?: Nullable<number>;
   year?: Nullable<number>;
+  events: Event[];
 }
 
 const CellList = ({
@@ -17,6 +18,7 @@ const CellList = ({
   day = null,
   month = null,
   year = null,
+  events,
 }: CellListProps) => {
   let hours;
   let days;
@@ -29,6 +31,8 @@ const CellList = ({
       days.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
+
+    console.log(days);
 
     return days;
   };
@@ -93,6 +97,10 @@ const CellList = ({
               key={day.getDate()}
               setIsHidden={setIsHidden}
               day={day.getDate()}
+              date={day}
+              events={events.filter(
+                (event) => event.startDate.toDateString() === day.toDateString()
+              )}
             />
           ))}
           {endDummyDays(days[days.length - 1]).map((dummyDay: number) => (
