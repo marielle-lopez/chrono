@@ -4,7 +4,7 @@ import { schema } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../Button/Button';
 
-const EventForm = ({ formSubmit }) => {
+const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
   const {
     register,
     handleSubmit,
@@ -14,7 +14,6 @@ const EventForm = ({ formSubmit }) => {
 
   useEffect(() => {
     reset();
-    console.log('Hello world!');
   }, [isSubmitSuccessful]);
 
   return (
@@ -115,7 +114,7 @@ const EventForm = ({ formSubmit }) => {
       </div>
 
       <div className="flex justify-end">
-        <Button label="Submit" handleClick={formSubmit} type="primary" />
+        <Button label="Submit" type="primary" />
       </div>
     </form>
   );
