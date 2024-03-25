@@ -24,7 +24,9 @@ function App() {
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
   const [events, setEvents] = useState<Event[]>([]);
-  const [event, setEvent] = useState();
+  const [event, setEvent] = useState<Event>(null);
+  const [filter, setFilter] = useState('All');
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -191,7 +193,6 @@ function App() {
 
   useEffect(() => {
     if (event) {
-      console.log('triggered');
       updateModalBody('event');
       return;
     }
@@ -204,11 +205,20 @@ function App() {
     }
   }, [isHidden]);
 
+  useEffect(() => {
+    if (filter === 'All') {
+      setFilteredEvents([...events]);
+      return;
+    }
+    setFilteredEvents([...events].filter((event) => event.label === filter));
+  }, [filter, events]);
+
   return (
     <>
       <BrowserRouter>
         <NavBar
           label={getNavBarLabel(view)}
+          setFilter={setFilter}
           handleDecrement={handleDecrement}
           handleIncrement={handleIncrement}
           switchToDayView={switchToDayView}
@@ -222,7 +232,7 @@ function App() {
               <DayPage
                 day={day}
                 setIsHidden={setIsHidden}
-                events={events}
+                events={filteredEvents}
                 setEvent={setEvent}
               />
             }
@@ -233,7 +243,7 @@ function App() {
               <WeekPage
                 day={day}
                 setIsHidden={setIsHidden}
-                events={events}
+                events={filteredEvents}
                 setEvent={setEvent}
               />
             }
@@ -245,7 +255,7 @@ function App() {
                 month={month}
                 year={year}
                 setIsHidden={setIsHidden}
-                events={events}
+                events={filteredEvents}
                 setEvent={setEvent}
               />
             }
