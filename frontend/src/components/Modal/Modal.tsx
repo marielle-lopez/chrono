@@ -9,6 +9,7 @@ interface ModalProps {
   children: any;
   handleSubmit: () => void;
   displayFooter?: Nullable<boolean>;
+  heading: string;
 }
 
 const Modal = ({
@@ -17,6 +18,7 @@ const Modal = ({
   children,
   handleSubmit,
   displayFooter = false,
+  heading,
 }: ModalProps) => {
   return (
     <>
@@ -33,12 +35,12 @@ const Modal = ({
         <div className="flex flex-col justify-between min-w-96 min-h-60 bg-black rounded-lg px-4 py-4 shadow-xl">
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-              <h2 className="text-xl font-bold">Modal Heading</h2>
+              <h2 className="text-xl font-bold">{heading}</h2>
               <button onClick={() => setIsHidden(true)}>
                 <FaXmark />
               </button>
             </div>
-            <div className="flex flex-grow">{children}</div>
+            <div className="flex flex-col flex-grow">{children}</div>
           </div>
           {displayFooter && (
             <div className="flex justify-end gap-3 mt-6">
