@@ -1,7 +1,18 @@
-const EventCard = () => {
-  const colours = ['lime', 'teal', 'violet'];
+const EventCard = ({ event }: { event: Event }) => {
+  const label = () => {
+    if (event.label === 'Personal') {
+      return 'lime';
+    }
+    if (event.label === 'Work') {
+      return 'teal';
+    }
+    if (event.label === 'University') {
+      return 'violet';
+    }
+    return 'blue';
+  };
 
-  const colour = colours[Math.floor(Math.random() * colours.length)];
+  const colour = label();
 
   return (
     <div className={`bg-${colour}-400 bg-opacity-20 px-2 py-1 rounded-sm`}>
@@ -10,10 +21,10 @@ const EventCard = () => {
       >
         <div className="pl-1">
           <p className={`text-${colour}-200 font-medium text-sm`}>
-            Event title
+            {event.name}
           </p>
           <p className="uppercase text-xs font-semibold opacity-30">
-            Event time
+            {event.startDate.toLocaleTimeString()}
           </p>
         </div>
       </div>
