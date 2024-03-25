@@ -5,7 +5,7 @@ interface ButtonProps {
   type?: Nullable<string>;
   label?: Nullable<string>;
   icon?: Nullable<Image>;
-  handleClick: () => any;
+  handleClick?: Nullable<() => any>;
 }
 
 const Button = ({
@@ -13,23 +13,41 @@ const Button = ({
   type = null,
   label = null,
   icon = null,
-  handleClick,
+  handleClick = null,
 }: ButtonProps) => {
   return (
-    <button
-      className={`py-1 h-fit border border-stone-700 rounded-md ${
-        label !== null ? 'px-3' : 'px-1'
-      } ${
-        type === 'primary'
-          ? 'bg-lime-400 border-none text-black'
-          : 'bg-stone-800'
-      }`}
-      onClick={handleClick}
-    >
-      {children && children}
-      {label && label}
-      {icon && <img src={icon.src} alt={icon.alt} />}
-    </button>
+    <>
+      {handleClick ? (
+        <button
+          className={`py-1 h-fit border border-stone-700 rounded-md ${
+            label !== null ? 'px-3' : 'px-1'
+          } ${
+            type === 'primary'
+              ? 'bg-lime-400 border-none text-black'
+              : 'bg-stone-800'
+          }`}
+          onClick={handleClick}
+        >
+          {children && children}
+          {label && label}
+          {icon && <img src={icon.src} alt={icon.alt} />}
+        </button>
+      ) : (
+        <button
+          className={`py-1 h-fit border border-stone-700 rounded-md ${
+            label !== null ? 'px-3' : 'px-1'
+          } ${
+            type === 'primary'
+              ? 'bg-lime-400 border-none text-black'
+              : 'bg-stone-800'
+          }`}
+        >
+          {children && children}
+          {label && label}
+          {icon && <img src={icon.src} alt={icon.alt} />}
+        </button>
+      )}
+    </>
   );
 };
 
