@@ -26,6 +26,6 @@ export const getDifferenceBetweenDates = (
   endDate: Date
 ): number => {
   return Math.round(
-    (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
+    (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000)
   );
 };
