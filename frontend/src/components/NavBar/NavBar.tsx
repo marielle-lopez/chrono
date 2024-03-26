@@ -23,20 +23,15 @@ const NavBar = ({
 }: NavBarProps) => {
   return (
     <div className="flex justify-between items-center mb-6">
-      <div className="flex gap-4">
-        <img
-          className="h-6"
-          src="./src/assets/logo/logo-thumbnail.png"
-          alt="Chrono thumbnail logo"
-        />
+      <div className="flex">
         <div className="flex justify-center items-center gap-2">
           <Button handleClick={handleDecrement}>
             <FaChevronLeft className="h-3" />
           </Button>
-          <p className="flex text-center items-center">{label}</p>
           <Button handleClick={handleIncrement}>
             <FaChevronRight className="h-3" />
           </Button>
+          <p className="flex text-center items-center">{label}</p>
         </div>
       </div>
 
@@ -50,13 +45,13 @@ const NavBar = ({
           <option value="University">University</option>
           <option value="Work">Work</option>
         </select>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2 px-1 py-1 border border-zinc-900 rounded-lg">
           <NavLink
             to="/day"
             className={({ isActive }) =>
               isActive
-                ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
-                : 'text-sm'
+                ? 'bg-zinc-800  text-sm px-2 py-1 rounded-md'
+                : 'text-sm px-2 py-1'
             }
             onClick={switchToDayView}
           >
@@ -66,8 +61,8 @@ const NavBar = ({
             to="/week"
             className={({ isActive }) =>
               isActive
-                ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
-                : 'text-sm'
+                ? 'bg-zinc-800 text-sm px-2 py-1 rounded-md'
+                : 'text-sm px-2 py-1'
             }
             onClick={switchToWeekView}
           >
@@ -77,8 +72,8 @@ const NavBar = ({
             to="/month"
             className={({ isActive }) =>
               isActive
-                ? 'bg-lime-400 text-black text-sm px-1.5 rounded-md'
-                : 'text-sm'
+                ? 'bg-zinc-800 text-sm px-2 py-1 rounded-md'
+                : 'text-sm px-2 py-1'
             }
             onClick={switchToMonthView}
           >
