@@ -27,7 +27,7 @@ const EventCard = ({
     >
       <p className={`text-${colour}-200 font-medium text-sm`}>{event.name}</p>
       <p className="uppercase text-xs font-semibold opacity-30">
-        {event.startDate.toLocaleTimeString()}
+        {event.startedAt.toLocaleTimeString()}
       </p>
     </div>
   );
