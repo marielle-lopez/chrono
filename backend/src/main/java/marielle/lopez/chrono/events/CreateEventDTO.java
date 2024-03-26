@@ -1,7 +1,5 @@
 package marielle.lopez.chrono.events;
 
-import java.util.Date;
-
 import jakarta.validation.constraints.NotBlank;
 
 public class CreateEventDTO {
