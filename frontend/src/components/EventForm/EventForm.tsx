@@ -27,7 +27,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
             Name
           </label>
           <input
-            className="flex-grow bg-stone-900 border border-stone-800 rounded-md px-1.5 py-0.5"
+            className="flex-grow bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
             type="text"
             id="name"
             {...register('name')}
@@ -45,7 +45,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
               Start Date
             </label>
             <input
-              className="bg-stone-900 border border-stone-800 rounded-md px-1.5 py-0.5"
+              className="bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
               type="datetime-local"
               id="startDate"
               {...register('startDate')}
@@ -62,7 +62,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
               End Date
             </label>
             <input
-              className="bg-stone-900 border border-stone-800 rounded-md px-1.5 py-0.5"
+              className="bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
               type="datetime-local"
               id="endDate"
               {...register('endDate')}
@@ -80,7 +80,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
             Location
           </label>
           <input
-            className="flex-grow bg-stone-900 border border-stone-800 rounded-md px-1.5 py-0.5"
+            className="flex-grow bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
             type="text"
             id="location"
             {...register('location')}
@@ -97,7 +97,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
             Label
           </label>
           <select
-            className="flex-grow bg-stone-900 border border-stone-800 rounded-md px-1 py-0.5"
+            className="flex-grow bg-black border border-zinc-900 rounded-md px-1 py-0.5"
             id="label"
             {...register('label')}
           >
