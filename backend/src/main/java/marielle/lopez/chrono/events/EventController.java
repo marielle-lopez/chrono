@@ -1,6 +1,7 @@
 package marielle.lopez.chrono.events;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,10 @@ public class EventController {
 	}
 	
 	@GetMapping("/{id}")
-	public String getEvent(@PathVariable Long id) {
-		return this.eventService.getEventById(id);
+	public ResponseEntity<Event> getEvent(@PathVariable Long id) throws NotFoundException {
+		Optional<Event> maybeEvent = this.eventService.getEventById(id);
+		Event foundEvent = maybeEvent.orElseThrow(() -> new NotFoundException(Event.class, id));
+		return new ResponseEntity<>(foundEvent, HttpStatus.OK);
 	}
 	
 	@PostMapping
