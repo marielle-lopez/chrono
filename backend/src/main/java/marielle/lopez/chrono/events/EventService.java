@@ -1,6 +1,7 @@
 package marielle.lopez.chrono.events;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,12 @@ public class EventService {
 		return String.format("This updates an event with ID %d", id);
 	}
 	
-	public String deleteEventById(Long id) {
-		return String.format("This deletes an event with ID %d", id);
+	public boolean deleteEventById(Long id)  {
+		Optional<Event> maybeEvent = this.eventRepository.findById(id);
+		if (maybeEvent.isEmpty()) {
+			return false;
+		}
+		this.eventRepository.delete(maybeEvent.get());
+		return true;
 	}
 }
