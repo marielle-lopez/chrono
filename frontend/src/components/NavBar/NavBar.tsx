@@ -40,10 +40,10 @@ const NavBar = ({
           className="bg-stone-900 border border-stone-800 rounded-md"
           onChange={(e) => setFilter(e.target.value)}
         >
-          <option value="All">All</option>
-          <option value="Personal">Personal</option>
-          <option value="University">University</option>
-          <option value="Work">Work</option>
+          <option value="all">All</option>
+          <option value="personal">Personal</option>
+          <option value="university">University</option>
+          <option value="work">Work</option>
         </select>
         <div className="flex items-center gap-2 px-1 py-1 border border-zinc-900 rounded-lg">
           <NavLink
