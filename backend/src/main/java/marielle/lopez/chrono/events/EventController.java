@@ -44,8 +44,10 @@ public class EventController {
 	}
 	
 	@PatchMapping("/{id}")
-	public String updateEvent(@PathVariable Long id) {
-		return this.eventService.updateEventById(id);
+	public ResponseEntity<Event> updateEvent(@PathVariable Long id, @Valid @RequestBody UpdateEventDTO data) throws NotFoundException {
+		Optional<Event> maybeUpdatedEvent = this.eventService.updateEventById(id, data);
+		Event updatedEvent = maybeUpdatedEvent.orElseThrow(() -> new NotFoundException(Event.class, id));
+		return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
