@@ -24,4 +24,48 @@ public class Event extends BaseEntity {
 	
 	@Column
 	private String location;
+	
+	public Event() {
+		super();
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public Date getStartedAt() {
+		return this.startedAt;
+	}
+	
+	public void setStartedAt(Date startedAt) {
+		this.startedAt = startedAt;
+	}
+	
+	public Date getEndedAt() {
+		return this.endedAt;
+	}
+	
+	public void setEndedAt(Date endedAt) {
+		this.endedAt = endedAt;
+	}
+	
+	public String getLabel() {
+		return this.label;
+	}
+	
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
+	public String getLocation() {
+		return this.location;
+	}
+	
+	public void setLocation(String location) {
+		this.location = location;
+	}
 }
