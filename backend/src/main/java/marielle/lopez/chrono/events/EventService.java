@@ -24,8 +24,8 @@ public class EventService {
 		return this.eventRepository.findAll();
 	}
 	
-	public String getEventById(Long id) {
-		return String.format("This gets an event with ID %d", id);
+	public Optional<Event> getEventById(Long id) {
+		return this.eventRepository.findById(id);
 	}
 	
 	public Event createEvent(@Valid CreateEventDTO data) {
