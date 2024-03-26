@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import marielle.lopez.chrono.exceptions.NotFoundException;
 
 @RestController
 @RequestMapping("/events")
@@ -45,7 +46,11 @@ public class EventController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public String deleteEvent(@PathVariable Long id) {
-		return this.eventService.deleteEventById(id);
+	public ResponseEntity<Event> deleteEvent(@PathVariable Long id) throws NotFoundException {
+		boolean deleted = this.eventService.deleteEventById(id);
+		if (!deleted) {
+			throw new NotFoundException(Event.class, id);
+		}
+		return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 	}
 }
