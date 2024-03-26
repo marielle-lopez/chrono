@@ -32,7 +32,7 @@ const Modal = ({
           isHidden && 'hidden'
         }`}
       >
-        <div className="flex flex-col justify-between min-w-96 min-h-60 bg-black rounded-lg px-4 py-4 shadow-xl">
+        <div className="flex flex-col justify-between min-w-96 min-h-60 bg-zinc-950 rounded-lg px-4 py-4 shadow-xl">
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
               <h2 className="text-xl font-bold">{heading}</h2>
