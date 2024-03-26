@@ -72,7 +72,7 @@ const CellList = ({
   return (
     <>
       {day && view === 'day' && (
-        <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-stone-800">
+        <div className="flex flex-col flex-grow gap-px gap-py px-px py-px bg-zinc-900">
           {hours?.map((hour) => (
             <Cell
               setIsHidden={setIsHidden}
@@ -89,7 +89,7 @@ const CellList = ({
         </div>
       )}
       {day && view === 'week' && (
-        <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-stone-800">
+        <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-zinc-900">
           {days?.map((day) => (
             <Cell
               setIsHidden={setIsHidden}
@@ -104,7 +104,7 @@ const CellList = ({
         </div>
       )}
       {days && view === 'month' && (
-        <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-stone-800">
+        <div className="flex-grow grid grid-cols-7 gap-px gap-py px-px py-px bg-zinc-900">
           {startDummyDays(days[0]).map((dummyDay: number) => (
             <Cell key={`dummy${dummyDay}`} day={0} />
           ))}
