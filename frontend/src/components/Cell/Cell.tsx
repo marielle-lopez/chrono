@@ -24,10 +24,7 @@ const Cell = ({
   return (
     <>
       {(hour || hour === 0) && setIsHidden && (
-        <div
-          className="flex-grow bg-stone-900"
-          onClick={() => setIsHidden(false)}
-        >
+        <div className="flex-grow bg-black" onClick={() => setIsHidden(false)}>
           {hour}
           {events &&
             setEvent &&
@@ -37,13 +34,11 @@ const Cell = ({
         </div>
       )}
       {(day || day === 0) && setIsHidden === null && (
-        <div className="flex flex-grow bg-stone-900">
-          {day !== 0 ? day : ''}
-        </div>
+        <div className="flex flex-grow bg-black">{day !== 0 ? day : ''}</div>
       )}
       {(day || day === 0) && setIsHidden && (
         <div
-          className="flex flex-col flex-grow bg-stone-900 px-2 py-1"
+          className="flex flex-col flex-grow bg-black pr-2"
           onClick={() => setIsHidden(false)}
         >
           {day !== 0 ? day : ''}
