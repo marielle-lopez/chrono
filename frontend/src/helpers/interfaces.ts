@@ -4,8 +4,12 @@ interface Image {
 }
 
 interface Event {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
   name: string;
-  startDate: Date;
-  endDate: Date;
+  startedAt: Date;
+  endedAt: Date;
+  location: string;
   label: string;
 }
