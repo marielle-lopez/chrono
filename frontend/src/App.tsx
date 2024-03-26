@@ -14,8 +14,9 @@ import {
 } from './helpers/functions';
 import Modal from './components/Modal/Modal';
 import EventForm from './components/EventForm/EventForm';
-import { FaLocationDot } from 'react-icons/fa6';
 import { LuCalendarClock } from 'react-icons/lu';
+import { createEvent, getAllEvents } from './services/event';
+import EditEventForm from './components/EditEventForm/EditEventForm';
 
 function App() {
   const [isHidden, setIsHidden] = useState(true);
@@ -25,8 +26,14 @@ function App() {
   const [year, setYear] = useState(-1);
   const [events, setEvents] = useState<Event[]>([]);
   const [event, setEvent] = useState<Event>(null);
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState('all');
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    getAllEvents()
+      .then((res) => setEvents(res))
+      .catch((e) => console.warn(e.message));
+  }, []);
 
   useEffect(() => {
     const currentDate = new Date();
@@ -157,8 +164,10 @@ function App() {
     return 'NavBar label could not be generated';
   };
 
-  const formSubmit = (data: Event) => {
-    setEvents([...events, data]);
+  const formSubmit = (data: object) => {
+    createEvent(data)
+      .then((res) => setEvents([...events, res]))
+      .catch((e) => console.warn(e.message));
   };
 
   const updateModalBody = (bodyContent: string) => {
@@ -167,22 +176,11 @@ function App() {
 
       return (
         <>
-          <div className="flex gap-6">
-            <span className="flex items-center gap-2">
-              <FaLocationDot />
-              <p>{event.location}</p>
-            </span>
-            <span className="flex items-center gap-2">
-              <LuCalendarClock />
-              <p>
-                {getDifferenceBetweenDates(event.startDate, today)} days left
-              </p>
-            </span>
-          </div>
-          <p>
-            {event.startDate.toLocaleString()} -{' '}
-            {event.endDate.toLocaleString()}
-          </p>
+          <span className="flex items-center gap-2">
+            <LuCalendarClock />
+            <p>{getDifferenceBetweenDates(event.startedAt, today)} days left</p>
+          </span>
+          <EditEventForm formSubmit={formSubmit} event={event} />
         </>
       );
     }
@@ -206,7 +204,7 @@ function App() {
   }, [isHidden]);
 
   useEffect(() => {
-    if (filter === 'All') {
+    if (filter === 'all') {
       setFilteredEvents([...events]);
       return;
     }
@@ -218,7 +216,7 @@ function App() {
       <BrowserRouter>
         <div className="bg-zinc-950 p-4">
           <img
-            className="h-8"
+            className="h-8 w-8 object-contain"
             src="./src/assets/logo/logo-thumbnail.png"
             alt="Chrono thumbnail logo"
           />
@@ -268,12 +266,18 @@ function App() {
                 />
               }
             />
-            {/* <Route
-            path="*"
-            element={
-              <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
-            }
-          /> */}
+            <Route
+              path="*"
+              element={
+                <MonthPage
+                  month={month}
+                  year={year}
+                  setIsHidden={setIsHidden}
+                  events={filteredEvents}
+                  setEvent={setEvent}
+                />
+              }
+            />
           </Routes>
         </div>
         <Modal
