@@ -1,5 +1,9 @@
 package marielle.lopez.chrono.events;
 
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +37,35 @@ public class EventService {
 		return this.eventRepository.save(newEvent);
 	}
 	
-	public String updateEventById(Long id) {
-		return String.format("This updates an event with ID %d", id);
+	public Optional<Event> updateEventById(Long id, @Valid UpdateEventDTO data) {
+		Optional<Event> maybeEvent = this.eventRepository.findById(id);
+		if (maybeEvent.isEmpty()) {
+			return maybeEvent;
+		}
+		Event foundEvent = maybeEvent.get();
+		if (data.getName() != null) {
+			foundEvent.setName(data.getName().trim());
+		}
+		if (data.getStartedAt() != null) {
+			TemporalAccessor ta = DateTimeFormatter.ISO_INSTANT.parse(data.getStartedAt());
+			Instant i = Instant.from(ta);
+			Date newStartedAt = Date.from(i);
+			foundEvent.setStartedAt(newStartedAt);
+		}
+		if (data.getEndedAt() != null) {
+			TemporalAccessor ta = DateTimeFormatter.ISO_INSTANT.parse(data.getEndedAt());
+			Instant i = Instant.from(ta);
+			Date newEndedAt = Date.from(i);
+			foundEvent.setEndedAt(newEndedAt);
+		}
+		if (data.getLocation() != null) {
+			foundEvent.setLocation(data.getLocation().trim());
+		}
+		if (data.getLabel() != null) {
+			foundEvent.setLabel(data.getLabel().trim().toLowerCase());
+		}
+		Event updatedEvent = this.eventRepository.save(foundEvent);
+		return Optional.of(updatedEvent);
 	}
 	
 	public boolean deleteEventById(Long id)  {
