@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { schema } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../Button/Button';
+import { eventSchema } from '../../helpers/schemas';
 
 const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
   const {
@@ -10,7 +10,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitSuccessful },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({ resolver: zodResolver(eventSchema) });
 
   useEffect(() => {
     reset();
@@ -41,35 +41,35 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
 
         <div className="flex gap-2">
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold" htmlFor="startDate">
+            <label className="text-sm font-bold" htmlFor="startedAt">
               Start Date
             </label>
             <input
               className="bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
               type="datetime-local"
-              id="startDate"
-              {...register('startDate')}
+              id="startedAt"
+              {...register('startedAt')}
             />
-            {errors.startDate?.message && (
+            {errors.startedAt?.message && (
               <p className="text-red-500 text-xs">
-                {errors.startDate.message.toString()}
+                {errors.startedAt.message.toString()}
               </p>
             )}
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold" htmlFor="endDate">
+            <label className="text-sm font-bold" htmlFor="endedAt">
               End Date
             </label>
             <input
               className="bg-black border border-zinc-900 rounded-md px-1.5 py-0.5"
               type="datetime-local"
-              id="endDate"
-              {...register('endDate')}
+              id="endedAt"
+              {...register('endedAt')}
             />
-            {errors.endDate?.message && (
+            {errors.endedAt?.message && (
               <p className="text-red-500 text-xs">
-                {errors.endDate.message.toString()}
+                {errors.endedAt.message.toString()}
               </p>
             )}
           </div>
