@@ -67,8 +67,6 @@ const CellList = ({
     days = getDaysInMonth(year, month);
   }
 
-  // console.log(events.map((event) => event.startDate.getHours()));
-
   return (
     <>
       {day && view === 'day' && (
@@ -80,8 +78,8 @@ const CellList = ({
               hour={hour}
               events={events.filter(
                 (event) =>
-                  event.startDate.toDateString() === day.toDateString() &&
-                  event.startDate.getHours() === hour
+                  event.startedAt.toDateString() === day.toDateString() &&
+                  event.startedAt.getHours() === hour
               )}
               setEvent={setEvent}
             />
@@ -96,7 +94,7 @@ const CellList = ({
               key={day.getDate()}
               day={day.getDate()}
               events={events.filter(
-                (event) => event.startDate.toDateString() === day.toDateString()
+                (event) => event.startedAt.toDateString() === day.toDateString()
               )}
               setEvent={setEvent}
             />
@@ -115,7 +113,7 @@ const CellList = ({
               day={day.getDate()}
               date={day}
               events={events.filter(
-                (event) => event.startDate.toDateString() === day.toDateString()
+                (event) => event.startedAt.toDateString() === day.toDateString()
               )}
               setEvent={setEvent}
             />
