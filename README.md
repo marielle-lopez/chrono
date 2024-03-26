@@ -38,6 +38,8 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
   - In the `NavBar` component, I added a `select` element with options a user can select to filter events
     - `select` has the `onChange` attribute using the component's `setFilter()` function to update the `filter` state
   - In `App.tsx`, I created `filteredEvents` and `filter` states, where the former is a filtered list of `events`; updated based on `filter`
+- Modify styling
+- Set up the Spring backend
 
 ### 25 March 2024
 
