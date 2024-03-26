@@ -17,30 +17,28 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <>
-      {handleClick ? (
+      {handleClick && type !== 'submit' && (
         <button
           className={`py-2 px-2 h-fit rounded-md ${
             label !== null ? 'px-3' : 'px-1'
-          } ${
-            type === 'primary'
-              ? 'bg-lime-400 border-none text-black'
-              : 'bg-zinc-950'
-          }`}
+          } 
+          ${type === 'danger' && 'bg-red-700'} 
+          ${type === 'primary' && 'bg-lime-400 border-none text-black'} 
+          ${type === 'secondary' && 'bg-zinc-800'}
+          ${!type && 'bg-zinc-950'}`}
           onClick={handleClick}
         >
           {children && children}
           {label && label}
           {icon && <img src={icon.src} alt={icon.alt} />}
         </button>
-      ) : (
+      )}
+      {type === 'submit' && handleClick && (
         <button
-          className={`py-1 h-fit border border-stone-700 rounded-md ${
-            label !== null ? 'px-3' : 'px-1'
-          } ${
-            type === 'primary'
-              ? 'bg-lime-400 border-none text-black'
-              : 'bg-stone-800'
+          className={`py-2 px-1 h-fit rounded-md bg-lime-400 text-black ${
+            label && 'px-3'
           }`}
+          type="submit"
         >
           {children && children}
           {label && label}
