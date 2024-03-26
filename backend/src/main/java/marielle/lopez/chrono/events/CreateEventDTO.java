@@ -9,10 +9,10 @@ public class CreateEventDTO {
 	private String name;
 	
 	@NotBlank
-	private Date startedAt;
+	private String startedAt;
 	
 	@NotBlank
-	private Date endedAt;
+	private String endedAt;
 	
 	@NotBlank
 	private String label;
@@ -24,11 +24,11 @@ public class CreateEventDTO {
 		return this.name;
 	}
 	
-	public Date getStartedAt() {
+	public String getStartedAt() {
 		return this.startedAt;
 	}
 	
-	public Date getEndedAt() {
+	public String getEndedAt() {
 		return this.endedAt;
 	}
 	
