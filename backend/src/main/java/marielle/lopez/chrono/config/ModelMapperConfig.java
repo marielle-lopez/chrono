@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import marielle.lopez.chrono.events.CreateEventDTO;
 import marielle.lopez.chrono.events.Event;
+import marielle.lopez.chrono.labels.CreateLabelDTO;
+import marielle.lopez.chrono.labels.Label;
 
 @Configuration
 public class ModelMapperConfig {
@@ -17,6 +19,7 @@ public class ModelMapperConfig {
 		mapper.getConfiguration().setSkipNullEnabled(true);
 		mapper.typeMap(String.class, String.class).setConverter(new TrimConverter());
 		mapper.typeMap(CreateEventDTO.class, Event.class).addMappings(m -> m.using(new LowerCaseConverter()).map(CreateEventDTO::getLabel, Event::setLabel));
+		mapper.typeMap(CreateLabelDTO.class, Label.class).addMappings(m -> m.using(new LowerCaseConverter()).map(CreateLabelDTO::getName, Label::setName));
 		
 		return mapper;
 	}
