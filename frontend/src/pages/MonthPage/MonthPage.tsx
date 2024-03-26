@@ -17,17 +17,19 @@ const MonthPage = ({
 }) => {
   return (
     <MainWrapper>
-      <CellHeaders />
-      {month !== -1 && year !== -1 && (
-        <CellList
-          setIsHidden={setIsHidden}
-          view="month"
-          year={year}
-          month={month}
-          events={events}
-          setEvent={setEvent}
-        />
-      )}
+      <div className="flex flex-col flex-grow">
+        <CellHeaders />
+        {month !== -1 && year !== -1 && (
+          <CellList
+            setIsHidden={setIsHidden}
+            view="month"
+            year={year}
+            month={month}
+            events={events}
+            setEvent={setEvent}
+          />
+        )}
+      </div>
     </MainWrapper>
   );
 };

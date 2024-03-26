@@ -15,14 +15,16 @@ const WeekPage = ({
 }) => {
   return (
     <MainWrapper>
-      <CellHeaders />
-      <CellList
-        setIsHidden={setIsHidden}
-        view="week"
-        day={day}
-        events={events}
-        setEvent={setEvent}
-      />
+      <div className="flex flex-col flex-grow">
+        <CellHeaders />
+        <CellList
+          setIsHidden={setIsHidden}
+          view="week"
+          day={day}
+          events={events}
+          setEvent={setEvent}
+        />
+      </div>
     </MainWrapper>
   );
 };
