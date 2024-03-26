@@ -216,57 +216,66 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavBar
-          label={getNavBarLabel(view)}
-          setFilter={setFilter}
-          handleDecrement={handleDecrement}
-          handleIncrement={handleIncrement}
-          switchToDayView={switchToDayView}
-          switchToWeekView={switchToWeekView}
-          switchToMonthView={switchToMonthView}
-        />
-        <Routes>
-          <Route
-            path="/day"
-            element={
-              <DayPage
-                day={day}
-                setIsHidden={setIsHidden}
-                events={filteredEvents}
-                setEvent={setEvent}
-              />
-            }
+        <div className="bg-zinc-950 p-4">
+          <img
+            className="h-8"
+            src="./src/assets/logo/logo-thumbnail.png"
+            alt="Chrono thumbnail logo"
           />
-          <Route
-            path="/week"
-            element={
-              <WeekPage
-                day={day}
-                setIsHidden={setIsHidden}
-                events={filteredEvents}
-                setEvent={setEvent}
-              />
-            }
+        </div>
+        <div className="flex flex-col flex-grow mt-5 mb-5 ml-8 mr-8">
+          <NavBar
+            label={getNavBarLabel(view)}
+            setFilter={setFilter}
+            handleDecrement={handleDecrement}
+            handleIncrement={handleIncrement}
+            switchToDayView={switchToDayView}
+            switchToWeekView={switchToWeekView}
+            switchToMonthView={switchToMonthView}
           />
-          <Route
-            path={`/month`}
-            element={
-              <MonthPage
-                month={month}
-                year={year}
-                setIsHidden={setIsHidden}
-                events={filteredEvents}
-                setEvent={setEvent}
-              />
-            }
-          />
-          {/* <Route
+          <Routes>
+            <Route
+              path="/day"
+              element={
+                <DayPage
+                  day={day}
+                  setIsHidden={setIsHidden}
+                  events={filteredEvents}
+                  setEvent={setEvent}
+                />
+              }
+            />
+            <Route
+              path="/week"
+              element={
+                <WeekPage
+                  day={day}
+                  setIsHidden={setIsHidden}
+                  events={filteredEvents}
+                  setEvent={setEvent}
+                />
+              }
+            />
+            <Route
+              path={`/month`}
+              element={
+                <MonthPage
+                  month={month}
+                  year={year}
+                  setIsHidden={setIsHidden}
+                  events={filteredEvents}
+                  setEvent={setEvent}
+                />
+              }
+            />
+            {/* <Route
             path="*"
             element={
               <MonthPage month={month} year={year} setIsHidden={setIsHidden} />
             }
           /> */}
-        </Routes>
+          </Routes>
+        </div>
         <Modal
           heading={event ? event.name : 'Create an event'}
           isHidden={isHidden}
