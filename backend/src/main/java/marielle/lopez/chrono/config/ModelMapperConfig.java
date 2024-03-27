@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import marielle.lopez.chrono.events.CreateEventDTO;
 import marielle.lopez.chrono.events.Event;
 import marielle.lopez.chrono.events.UpdateEventDTO;
-import marielle.lopez.chrono.labels.CreateLabelDTO;
-import marielle.lopez.chrono.labels.Label;
 
 @Configuration
 public class ModelMapperConfig {
@@ -40,15 +38,15 @@ public class ModelMapperConfig {
 		}
 	}
 	
-	private class LowerCaseConverter implements Converter<String, String> {
-		@Override
-		public String convert(MappingContext<String, String> context) {
-			if (context.getSource() == null) {
-				return null;
-			}
-			return context.getSource().toLowerCase();
-		}
-	}
+	// private class LowerCaseConverter implements Converter<String, String> {
+	// 	@Override
+	// 	public String convert(MappingContext<String, String> context) {
+	// 		if (context.getSource() == null) {
+	// 			return null;
+	// 		}
+	// 		return context.getSource().toLowerCase();
+	// 	}
+	// }
 	
 	private class StringToDateConverter implements Converter<String, Date> {
 		@Override
