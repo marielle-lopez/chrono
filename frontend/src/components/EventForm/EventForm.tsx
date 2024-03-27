@@ -114,7 +114,7 @@ const EventForm = ({ formSubmit }: { formSubmit: (data: any) => void }) => {
       </div>
 
       <div className="flex justify-end">
-        <Button label="Submit" type="primary" />
+        <Button label="Submit" type="submit" />
       </div>
     </form>
   );
