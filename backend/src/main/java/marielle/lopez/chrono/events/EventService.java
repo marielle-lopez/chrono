@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import marielle.lopez.chrono.exceptions.ServiceValidationException;
+import marielle.lopez.chrono.exceptions.ValidationErrors;
+import marielle.lopez.chrono.labels.Label;
+import marielle.lopez.chrono.labels.LabelService;
 
 @Service
 @Transactional
@@ -23,6 +27,8 @@ public class EventService {
 	@Autowired
 	private EventRepository eventRepository;
 	
+	@Autowired
+	private LabelService labelService;
 	
 	public List<Event> getAllEvents() {
 		return this.eventRepository.findAll();
@@ -32,12 +38,24 @@ public class EventService {
 		return this.eventRepository.findById(id);
 	}
 	
-	public Event createEvent(@Valid CreateEventDTO data) {
+	public Event createEvent(@Valid CreateEventDTO data) throws ServiceValidationException {
+		ValidationErrors errors = new ValidationErrors();
 		Event newEvent = modelMapper.map(data, Event.class);
+		Long labelId = data.getLabelId();
+		Optional<Label> maybeLabel = this.labelService.getLabelById(labelId);
+		if (maybeLabel.isEmpty()) {
+			errors.addError("label", String.format("Label with ID %d does not exist", labelId));
+		} else {
+			newEvent.setLabel(maybeLabel.get());
+		}
+		if (errors.hasErrors()) {
+			throw new ServiceValidationException(errors);
+		}
 		return this.eventRepository.save(newEvent);
 	}
 	
-	public Optional<Event> updateEventById(Long id, @Valid UpdateEventDTO data) {
+	public Optional<Event> updateEventById(Long id, @Valid UpdateEventDTO data) throws ServiceValidationException {
+		ValidationErrors errors = new ValidationErrors();
 		Optional<Event> maybeEvent = this.eventRepository.findById(id);
 		if (maybeEvent.isEmpty()) {
 			return maybeEvent;
@@ -61,8 +79,16 @@ public class EventService {
 		if (data.getLocation() != null) {
 			foundEvent.setLocation(data.getLocation().trim());
 		}
-		if (data.getLabel() != null) {
-			foundEvent.setLabel(data.getLabel().trim().toLowerCase());
+		if (data.getLabelId() != null) {
+			Long labelId = data.getLabelId();
+			Optional<Label> maybeLabel = this.labelService.getLabelById(labelId);
+			if (maybeLabel.isEmpty()) {
+				errors.addError("label", String.format("Label with ID %d does not exist", labelId));
+			}
+			foundEvent.setLabel(maybeLabel.get());
+		}
+		if (errors.hasErrors()) {
+			throw new ServiceValidationException(errors);
 		}
 		Event updatedEvent = this.eventRepository.save(foundEvent);
 		return Optional.of(updatedEvent);
