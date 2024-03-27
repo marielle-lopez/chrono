@@ -11,5 +11,13 @@ interface Event {
   startedAt: Date;
   endedAt: Date;
   location: string;
-  label: string;
+  label: Label;
+}
+
+interface Label {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  name: string;
+  events: Event[];
 }
