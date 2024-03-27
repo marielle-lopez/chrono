@@ -1,5 +1,6 @@
 package marielle.lopez.chrono.events;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 
 public class UpdateEventDTO {
@@ -15,8 +16,8 @@ public class UpdateEventDTO {
 	@Pattern(regexp = "^(?=\\S).*$", message = "Location cannot be empty")
 	private String location;
 	
-	@Pattern(regexp = "^(?=\\S).*$", message = "Label cannot be empty")
-	private String label;
+	@Min(1)
+	private Long labelId;
 	
 	public String getName() {
 		return this.name;
@@ -50,11 +51,11 @@ public class UpdateEventDTO {
 		this.location = location;
 	}
 	
-	public String getLabel() {
-		return this.label;
+	public Long getLabelId() {
+		return this.labelId;
 	}
 	
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(Long labelId) {
+		this.labelId = labelId;
 	}
 }
