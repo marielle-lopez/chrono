@@ -10,14 +10,14 @@ export const getAllEvents = async (): Promise<Event[]> => {
   }
 
   const events = await response.json();
-  const formattedEvents = events.map((event) => {
+  const formattedEvents = events.map((event: Event) => {
     event.createdAt = new Date(event.createdAt);
     event.updatedAt = new Date(event.updatedAt);
     event.startedAt = new Date(event.startedAt);
     event.endedAt = new Date(event.endedAt);
     return event;
   });
-  console.log(formattedEvents);
+
   return formattedEvents;
 };
 
