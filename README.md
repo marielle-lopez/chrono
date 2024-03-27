@@ -35,6 +35,11 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
 
 - Managed to fix the bug related to dynamic colour styling not working as intended in `EventCard` components
   - According to this [GitHub discussion](https://github.com/tailwindlabs/tailwindcss/discussions/11189), class names should not be constructed dynamically; rather, complete class names need to be provided
+- A user is now able to delete and edit an event
+  - I encountered an issue associated with having multiple buttons in the `EditEventForm` component; with the help of [this Stack Overflow post](https://stackoverflow.com/questions/63170709/html-form-two-buttons-only-one-to-submit), I learned buttons not intended to submit the form need to have the `type` attribute assigned to `button`
+  - There was an issue with events being created on the frontend having their dates incorrectly stored in the database
+    - `CreateEventDTO` had `startedAt` and `endedAt` as `String`-typed values, while in the `Event` entity they are `Date`-typed values
+    - With the help of [this Stack Overflow post](https://stackoverflow.com/questions/2201925/converting-iso-8601-compliant-string-to-java-util-date/74256999#74256999) on converting ISO date strings, I fixed this by adding a `StringToDateConverter()` method in `ModelMapperConfig.java`, and utilised it when mapping `CreateEventDTO` data to the `Event` entity
 
 ### 26 March 2024
 
