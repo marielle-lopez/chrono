@@ -119,8 +119,9 @@ const EditEventForm = ({
             Label
           </label>
           <select
-            className="flex-grow bg-black border border-zinc-900 rounded-md px-1 py-0.5"
+            className="flex-grow bg-black border border-zinc-900 rounded-md px-1 py-0.5 capitalize"
             id="labelId"
+            defaultValue={event.label.id}
             {...register('labelId')}
           >
             {labels.map((label) => (
