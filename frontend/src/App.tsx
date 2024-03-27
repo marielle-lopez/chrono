@@ -15,7 +15,12 @@ import {
 import Modal from './components/Modal/Modal';
 import EventForm from './components/EventForm/EventForm';
 import { LuCalendarClock } from 'react-icons/lu';
-import { createEvent, getAllEvents } from './services/event';
+import {
+  createEvent,
+  getAllEvents,
+  deleteEventById,
+  updateEventById,
+} from './services/event';
 import EditEventForm from './components/EditEventForm/EditEventForm';
 
 function App() {
@@ -25,7 +30,7 @@ function App() {
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
   const [events, setEvents] = useState<Event[]>([]);
-  const [event, setEvent] = useState<Event>(null);
+  const [event, setEvent] = useState<Event>();
   const [filter, setFilter] = useState('all');
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
 
@@ -166,7 +171,31 @@ function App() {
 
   const formSubmit = (data: object) => {
     createEvent(data)
-      .then((res) => setEvents([...events, res]))
+      .then((res) => {
+        setIsHidden(true);
+        setEvents([...events, res]);
+      })
+      .catch((e) => console.warn(e.message));
+  };
+
+  const handleDelete = (id: number) => {
+    deleteEventById(id)
+      .then(() => getAllEvents())
+      .then((res) => {
+        setEvents(res);
+        setIsHidden(true);
+      })
+      .catch((e) => console.warn(e.message));
+  };
+
+  // TODO: make handleUpdate() dry; need to pass event.id, not depend on state
+  const handleUpdate = (data: object) => {
+    updateEventById(event.id, data)
+      .then(() => getAllEvents())
+      .then((res) => {
+        setEvents(res);
+        setIsHidden(true);
+      })
       .catch((e) => console.warn(e.message));
   };
 
@@ -180,7 +209,12 @@ function App() {
             <LuCalendarClock />
             <p>{getDifferenceBetweenDates(event.startedAt, today)} days left</p>
           </span>
-          <EditEventForm formSubmit={formSubmit} event={event} />
+          <EditEventForm
+            setIsHidden={setIsHidden}
+            handleUpdate={handleUpdate}
+            event={event}
+            handleDelete={handleDelete}
+          />
         </>
       );
     }
@@ -199,7 +233,7 @@ function App() {
 
   useEffect(() => {
     if (isHidden && event) {
-      setEvent(null);
+      setEvent();
     }
   }, [isHidden]);
 
