@@ -22,12 +22,10 @@ public class ModelMapperConfig {
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setSkipNullEnabled(true);
 		mapper.typeMap(String.class, String.class).setConverter(new TrimConverter());
-		mapper.typeMap(CreateEventDTO.class, Event.class).addMappings(m -> m.using(new LowerCaseConverter()).map(CreateEventDTO::getLabel, Event::setLabel));
 		mapper.typeMap(CreateEventDTO.class, Event.class).addMappings(m -> m.using(new StringToDateConverter()).map(CreateEventDTO::getStartedAt, Event::setStartedAt));
 		mapper.typeMap(CreateEventDTO.class, Event.class).addMappings(m -> m.using(new StringToDateConverter()).map(CreateEventDTO::getEndedAt, Event::setEndedAt));
 		mapper.typeMap(UpdateEventDTO.class, Event.class).addMappings(m -> m.using(new StringToDateConverter()).map(UpdateEventDTO::getStartedAt, Event::setStartedAt));
 		mapper.typeMap(UpdateEventDTO.class, Event.class).addMappings(m -> m.using(new StringToDateConverter()).map(UpdateEventDTO::getEndedAt, Event::setEndedAt));
-		mapper.typeMap(CreateLabelDTO.class, Label.class).addMappings(m -> m.using(new LowerCaseConverter()).map(CreateLabelDTO::getName, Label::setName));
 		
 		return mapper;
 	}
