@@ -3,13 +3,18 @@ import { useForm } from 'react-hook-form';
 import { eventSchema } from '../../helpers/schemas';
 import { useEffect } from 'react';
 import Button from '../Button/Button';
+import { convertUTCToLocale } from '../../helpers/functions';
 
 const EditEventForm = ({
-  formSubmit,
+  handleUpdate,
   event,
+  handleDelete,
+  setIsHidden,
 }: {
-  formSubmit: (data: object) => void;
+  handleUpdate: (data: object) => void;
   event: Event;
+  handleDelete: (id: number) => void;
+  setIsHidden: (isHidden: boolean) => void;
 }) => {
   const {
     register,
@@ -20,7 +25,10 @@ const EditEventForm = ({
     resolver: zodResolver(eventSchema),
     defaultValues: {
       name: event.name,
+      startedAt: convertUTCToLocale(event.startedAt),
+      endedAt: convertUTCToLocale(event.endedAt),
       location: event.location,
+      label: event.label,
     },
   });
 
@@ -31,7 +39,7 @@ const EditEventForm = ({
   return (
     <form
       className="flex flex-col flex-grow gap-8"
-      onSubmit={handleSubmit(formSubmit)}
+      onSubmit={handleSubmit(handleUpdate)}
     >
       <div className="flex flex-col flex-grow gap-4">
         <div className="flex flex-col gap-2">
@@ -127,23 +135,17 @@ const EditEventForm = ({
 
       <div className="flex justify-between">
         <Button
-          handleClick={() => console.log('This button deletes an event')}
+          handleClick={() => handleDelete(event.id)}
           label="Delete"
           type="danger"
         />
         <div className="flex gap-3">
           <Button
-            handleClick={() => console.log('This button closes the modal')}
+            handleClick={() => setIsHidden(true)}
             label="Cancel"
             type="secondary"
           />
-          <Button
-            handleClick={() =>
-              console.log('This button submits event information changes')
-            }
-            label="Submit"
-            type="submit"
-          />
+          <Button label="Submit" type="submit" />
         </div>
       </div>
     </form>
