@@ -1,3 +1,4 @@
+import { Hour } from '../../helpers/enums';
 import EventCard from '../EventCard/EventCard';
 
 type Nullable<T> = T | undefined | null;
@@ -24,13 +25,18 @@ const Cell = ({
   return (
     <>
       {(hour || hour === 0) && setIsHidden && (
-        <div className="flex-grow bg-black" onClick={() => setIsHidden(false)}>
-          {hour}
-          {events &&
-            setEvent &&
-            events.map((event) => (
-              <EventCard key={event.name} event={event} setEvent={setEvent} />
-            ))}
+        <div
+          className="flex flex-grow bg-black"
+          onClick={() => setIsHidden(false)}
+        >
+          <p>{hour}</p>
+          <div className="flex flex-col gap-2 pl-4">
+            {events &&
+              setEvent &&
+              events.map((event) => (
+                <EventCard key={event.name} event={event} setEvent={setEvent} />
+              ))}
+          </div>
         </div>
       )}
       {(day || day === 0) && setIsHidden === null && (
@@ -41,7 +47,7 @@ const Cell = ({
           className="flex flex-col flex-grow bg-black pr-2"
           onClick={() => setIsHidden(false)}
         >
-          {day !== 0 ? day : ''}
+          {day !== 0 ? <p className="py-1 px-2">{day}</p> : ''}
           {events &&
             setEvent &&
             events.map((event) => (
