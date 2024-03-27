@@ -10,11 +10,13 @@ const EditEventForm = ({
   event,
   handleDelete,
   setIsHidden,
+  labels,
 }: {
   handleUpdate: (data: object) => void;
   event: Event;
   handleDelete: (id: number) => void;
   setIsHidden: (isHidden: boolean) => void;
+  labels: Label[];
 }) => {
   const {
     register,
@@ -113,21 +115,23 @@ const EditEventForm = ({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-bold" htmlFor="label">
+          <label className="text-sm font-bold" htmlFor="labelId">
             Label
           </label>
           <select
             className="flex-grow bg-black border border-zinc-900 rounded-md px-1 py-0.5"
-            id="label"
-            {...register('label')}
+            id="labelId"
+            {...register('labelId')}
           >
-            <option>Personal</option>
-            <option>Work</option>
-            <option>University</option>
+            {labels.map((label) => (
+              <option className="capitalize" key={label.id} value={label.id}>
+                {label.name}
+              </option>
+            ))}
           </select>
-          {errors.label?.message && (
+          {errors.labelId?.message && (
             <p className="text-red-500 text-xs">
-              {errors.label.message.toString()}
+              {errors.labelId.message.toString()}
             </p>
           )}
         </div>
