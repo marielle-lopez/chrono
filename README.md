@@ -31,6 +31,11 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
 
 ## Task Completion History
 
+### 27 March 2024
+
+- Managed to fix the bug related to dynamic colour styling not working as intended in `EventCard` components
+  - According to this [GitHub discussion](https://github.com/tailwindlabs/tailwindcss/discussions/11189), class names should not be constructed dynamically; rather, complete class names need to be provided
+
 ### 26 March 2024
 
 - Hit a huge milestone for this project; completed the entire frontend of Chrono!
