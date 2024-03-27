@@ -7,9 +7,11 @@ import { eventSchema } from '../../helpers/schemas';
 const EventForm = ({
   formSubmit,
   labels,
+  setIsHidden,
 }: {
   formSubmit: (data: any) => void;
   labels: Label[];
+  setIsHidden: (isHidden: boolean) => void;
 }) => {
   const {
     register,
@@ -121,7 +123,12 @@ const EventForm = ({
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-3">
+        <Button
+          label="Cancel"
+          type="secondary"
+          handleClick={() => setIsHidden(true)}
+        />
         <Button label="Submit" type="submit" />
       </div>
     </form>
