@@ -12,8 +12,6 @@ const DayPage = ({
   events: Event[];
   setEvent: (event: Event) => void;
 }) => {
-  console.log(day);
-
   return (
     <MainWrapper>
       <CellList
