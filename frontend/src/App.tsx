@@ -167,9 +167,15 @@ function App() {
     }
     if (view === 'week') {
       const datesInWeek = getDatesInWeek(day);
-      return `${formatDateToString(datesInWeek[0])} - ${formatDateToString(
-        datesInWeek[datesInWeek.length - 1]
-      )}`;
+      const initialDate = formatDateToString(datesInWeek[0])
+        .split(' ')
+        .slice(1)
+        .join(' ');
+      const endDate = formatDateToString(datesInWeek[datesInWeek.length - 1])
+        .split(' ')
+        .slice(1)
+        .join(' ');
+      return `${initialDate} - ${endDate}`;
     }
     if (view === 'month') {
       return `${Object.values(Month)[month]} ${year}`;
@@ -198,37 +204,53 @@ function App() {
 
   // TODO: make handleUpdate() dry; need to pass event.id, not depend on state
   const handleUpdate = (data: object) => {
-    updateEventById(event.id, data)
-      .then(() => getAllEvents())
-      .then((res) => {
-        setEvents(res);
-        setIsHidden(true);
-      })
-      .catch((e) => console.warn(e.message));
+    {
+      event &&
+        updateEventById(event.id, data)
+          .then(() => getAllEvents())
+          .then((res) => {
+            setEvents(res);
+            setIsHidden(true);
+          })
+          .catch((e) => console.warn(e.message));
+    }
   };
 
   const updateModalBody = (bodyContent: string) => {
     if (bodyContent === 'event' && event) {
       const today = new Date();
+      const daysDifference = getDifferenceBetweenDates(event.startedAt, today);
 
       return (
         <>
-          <span className="flex items-center gap-2">
-            <LuCalendarClock />
-            <p>{getDifferenceBetweenDates(event.startedAt, today)} days left</p>
-          </span>
-          <EditEventForm
-            labels={labels}
-            setIsHidden={setIsHidden}
-            handleUpdate={handleUpdate}
-            event={event}
-            handleDelete={handleDelete}
-          />
+          <div className="flex flex-col gap-6">
+            <span className="flex items-center gap-3">
+              <LuCalendarClock />
+              <p className="text-sm">
+                {daysDifference === 0 && 'Today'}
+                {daysDifference < 0 && `${daysDifference * -1} days ago`}
+                {daysDifference > 0 && `${daysDifference} days left`}
+              </p>
+            </span>
+            <EditEventForm
+              labels={labels}
+              setIsHidden={setIsHidden}
+              handleUpdate={handleUpdate}
+              event={event}
+              handleDelete={handleDelete}
+            />
+          </div>
         </>
       );
     }
     if (bodyContent === 'form') {
-      return <EventForm labels={labels} formSubmit={formSubmit} />;
+      return (
+        <EventForm
+          labels={labels}
+          formSubmit={formSubmit}
+          setIsHidden={setIsHidden}
+        />
+      );
     }
   };
 
