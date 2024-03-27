@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import marielle.lopez.chrono.exceptions.NotFoundException;
+import marielle.lopez.chrono.exceptions.ServiceValidationException;
 
 @RestController
 @RequestMapping("/events")
@@ -38,13 +39,13 @@ public class EventController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Event> createEvent(@Valid @RequestBody CreateEventDTO data) {
+	public ResponseEntity<Event> createEvent(@Valid @RequestBody CreateEventDTO data) throws ServiceValidationException {
 		Event createdEvent = this.eventService.createEvent(data);
 		return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
 	}
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<Event> updateEvent(@PathVariable Long id, @Valid @RequestBody UpdateEventDTO data) throws NotFoundException {
+	public ResponseEntity<Event> updateEvent(@PathVariable Long id, @Valid @RequestBody UpdateEventDTO data) throws NotFoundException, ServiceValidationException {
 		Optional<Event> maybeUpdatedEvent = this.eventService.updateEventById(id, data);
 		Event updatedEvent = maybeUpdatedEvent.orElseThrow(() -> new NotFoundException(Event.class, id));
 		return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
