@@ -33,7 +33,7 @@ const NavBar = ({
           <Button handleClick={handleIncrement}>
             <FaChevronRight className="h-3" />
           </Button>
-          <p className="flex text-center items-center">{label}</p>
+          <p className="flex items-center">{label}</p>
         </div>
       </div>
 
