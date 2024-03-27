@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 interface NavBarProps {
   label: string;
-  setFilter: (filter: string) => void;
+  labels: Label[];
+  setFilter: (filter: number) => void;
   handleDecrement: () => void;
   handleIncrement: () => void;
   switchToDayView: () => void;
@@ -14,6 +15,7 @@ interface NavBarProps {
 
 const NavBar = ({
   label,
+  labels,
   setFilter,
   handleDecrement,
   handleIncrement,
@@ -38,12 +40,16 @@ const NavBar = ({
       <div className="flex flex-grow justify-end items-center gap-4">
         <select
           className="bg-stone-900 border border-stone-800 rounded-md"
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => {
+            setFilter(parseInt(e.target.value));
+          }}
         >
-          <option value="all">All</option>
-          <option value="personal">Personal</option>
-          <option value="university">University</option>
-          <option value="work">Work</option>
+          <option value={0}>All</option>
+          {labels.map((label) => (
+            <option className="capitalize" key={label.id} value={label.id}>
+              {label.name}
+            </option>
+          ))}
         </select>
         <div className="flex items-center gap-2 px-1 py-1 border border-zinc-900 rounded-lg">
           <NavLink
