@@ -27,13 +27,14 @@ const Button = ({
           ${type === 'secondary' && 'bg-zinc-800'}
           ${!type && 'bg-zinc-950'}`}
           onClick={handleClick}
+          type="button"
         >
           {children && children}
           {label && label}
           {icon && <img src={icon.src} alt={icon.alt} />}
         </button>
       )}
-      {type === 'submit' && handleClick && (
+      {type === 'submit' && (
         <button
           className={`py-2 px-1 h-fit rounded-md bg-lime-400 text-black ${
             label && 'px-3'
