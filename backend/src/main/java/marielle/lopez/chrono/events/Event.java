@@ -2,10 +2,15 @@ package marielle.lopez.chrono.events;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import marielle.lopez.chrono.common.BaseEntity;
+import marielle.lopez.chrono.labels.Label;
 
 @Entity
 @Table(name = "events")
@@ -20,10 +25,12 @@ public class Event extends BaseEntity {
 	private Date endedAt;
 	
 	@Column
-	private String label;
-	
-	@Column
 	private String location;
+	
+	@ManyToOne()
+	@JoinColumn(name = "label_id")
+	@JsonIgnoreProperties("events")
+	private Label label;
 	
 	public Event() {
 		super();
@@ -53,11 +60,11 @@ public class Event extends BaseEntity {
 		this.endedAt = endedAt;
 	}
 	
-	public String getLabel() {
+	public Label getLabel() {
 		return this.label;
 	}
 	
-	public void setLabel(String label) {
+	public void setLabel(Label label) {
 		this.label = label;
 	}
 	
@@ -67,5 +74,11 @@ public class Event extends BaseEntity {
 	
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return "Event [name=" + name + ", startedAt=" + startedAt + ", endedAt=" + endedAt + ", label=" + label
+				+ ", location=" + location + "]";
 	}
 }
