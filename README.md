@@ -6,7 +6,7 @@ Sleek and user-friendly, Chrono offers a clean interface that prioritizes functi
 
 ## Current and Future Plans
 
-To see what I'm currently working on, what's on the agenda, completed tasks, as well as found and fixed bugs, take a look at my [project board](https://github.com/users/marielle-lopez/projects/6/views/1) for Chrono.
+To get a comprehensive view on what I'm currently working on, what's on the agenda, completed tasks, as well as found and fixed bugs, take a look at my [project board](https://github.com/users/marielle-lopez/projects/6/views/1) for Chrono.
 
 ## The Stack
 
@@ -40,6 +40,8 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
   - There was an issue with events being created on the frontend having their dates incorrectly stored in the database
     - `CreateEventDTO` had `startedAt` and `endedAt` as `String`-typed values, while in the `Event` entity they are `Date`-typed values
     - With the help of [this Stack Overflow post](https://stackoverflow.com/questions/2201925/converting-iso-8601-compliant-string-to-java-util-date/74256999#74256999) on converting ISO date strings, I fixed this by adding a `StringToDateConverter()` method in `ModelMapperConfig.java`, and utilised it when mapping `CreateEventDTO` data to the `Event` entity
+- Created a many-to-one relationship between the 'Event' and 'Label' domains in the backend
+- Using the API, events are able to be filtered based on the user's selected label
 
 ### 26 March 2024
 
