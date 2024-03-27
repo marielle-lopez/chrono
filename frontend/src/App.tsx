@@ -22,6 +22,7 @@ import {
   updateEventById,
 } from './services/event';
 import EditEventForm from './components/EditEventForm/EditEventForm';
+import { getAllLabels, getLabelById } from './services/label';
 
 function App() {
   const [isHidden, setIsHidden] = useState(true);
@@ -29,10 +30,17 @@ function App() {
   const [day, setDay] = useState(new Date());
   const [month, setMonth] = useState(-1);
   const [year, setYear] = useState(-1);
+  const [labels, setLabels] = useState<Label[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [event, setEvent] = useState<Event>();
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(0);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    getAllLabels()
+      .then((res) => setLabels(res))
+      .catch((e) => console.warn(e.message));
+  }, []);
 
   useEffect(() => {
     getAllEvents()
@@ -210,6 +218,7 @@ function App() {
             <p>{getDifferenceBetweenDates(event.startedAt, today)} days left</p>
           </span>
           <EditEventForm
+            labels={labels}
             setIsHidden={setIsHidden}
             handleUpdate={handleUpdate}
             event={event}
@@ -219,7 +228,7 @@ function App() {
       );
     }
     if (bodyContent === 'form') {
-      return <EventForm formSubmit={formSubmit} />;
+      return <EventForm labels={labels} formSubmit={formSubmit} />;
     }
   };
 
@@ -238,11 +247,15 @@ function App() {
   }, [isHidden]);
 
   useEffect(() => {
-    if (filter === 'all') {
+    if (filter === 0) {
       setFilteredEvents([...events]);
       return;
     }
-    setFilteredEvents([...events].filter((event) => event.label === filter));
+    getLabelById(filter)
+      .then((res) => {
+        setFilteredEvents(res.events);
+      })
+      .catch((e) => console.warn(e.message));
   }, [filter, events]);
 
   return (
@@ -259,6 +272,7 @@ function App() {
           <NavBar
             label={getNavBarLabel(view)}
             setFilter={setFilter}
+            labels={labels}
             handleDecrement={handleDecrement}
             handleIncrement={handleIncrement}
             switchToDayView={switchToDayView}
