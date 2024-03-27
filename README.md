@@ -45,6 +45,9 @@ To see what I'm currently working on, what's on the agenda, completed tasks, as 
   - In `App.tsx`, I created `filteredEvents` and `filter` states, where the former is a filtered list of `events`; updated based on `filter`
 - Modify styling
 - Set up the Spring backend
+  - Implemented controllers, services, and repositories for the `Event` and `Label` domains, allowing `GET`, `POST`, `PATCH` and `DELETE` requests
+- Begun connecting the backend and the frontend
+  - As of now, a user is able to get all events and create an event
 
 ### 25 March 2024
 
