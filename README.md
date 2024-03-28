@@ -4,6 +4,10 @@ Introducing Chrono, your ultimate calendar companion designed to streamline your
 
 Sleek and user-friendly, Chrono offers a clean interface that prioritizes functionality without sacrificing style. Its intuitive design makes navigating your schedule a breeze, allowing you to focus on what matters most—making the most of your time.
 
+<br />
+
+![Brief Chrono demonstration](./chrono-demo.gif)
+
 ## Current and Future Plans
 
 To get a comprehensive view on what I'm currently working on, what's on the agenda, completed tasks, as well as found and fixed bugs, take a look at my [project board](https://github.com/users/marielle-lopez/projects/6/views/1) for Chrono.
